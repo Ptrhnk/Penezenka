@@ -26,6 +26,15 @@ const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Poppins');
     font-family: 'Poppins', sans-serif;
   }
+  /* Variables */
+  :root {
+    --primary-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    --transaction-box-margin: 1rem;
+    --main-button-height: 4rem;
+    --filter-panel-height: 5rem;
+    --add-button-height: 4rem;
+    --transaction-box-margin: .7rem;
+  }
 `;
 
 const Container = styled.div`
@@ -44,25 +53,42 @@ const Wallet = styled.div`
   background-color: rgb(0, 169, 255);
 `;
 
-const FilterButtonGroup = styled.div`
+const MainButtonGroup = styled.div`
   position: absolute;
-  top: 4rem;
-  width: 50%;
-  height: 4rem;
+  top: 0;
+  width: 100%;
+  height: var(--main-button-height);
 
   display: flex;
   justify-content: space-around;
   align-items: center;
 `;
 
+const FilterButtonGroup = styled.div`
+  position: absolute;
+  top: var(--main-button-height);
+  right: 0;
+  width: 100%;
+  height: var(--filter-panel-height);
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-around;
+  /* justify-content: center; */
+  align-items: center;
+`;
+
 const TransactionList = styled.div`
   position: absolute;
-  top: 8rem;
-  bottom: 4rem;
+  /* calc main button height + filter panel height */
+  top: calc(var(--main-button-height) + var(--filter-panel-height));
+  bottom: var(--add-button-height);
   left: 0;
   width: 100%;
   overflow-y: scroll;
-  padding: 0.5rem 0.5rem 0 0.5rem;
+  padding: var(--transaction-box-margin) var(--transaction-box-margin) 0
+    var(--transaction-box-margin);
   border-top: 2px solid black;
   border-bottom: 2px solid black;
 
@@ -70,22 +96,13 @@ const TransactionList = styled.div`
   flex-direction: column;
 `;
 
-const MainButtonGroup = styled.div`
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 4rem;
-
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-
 const AddButtonGroup = styled.div`
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 4rem;
+  height: var(--add-button-height);
+  box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 
   display: flex;
   justify-content: center;
@@ -93,9 +110,8 @@ const AddButtonGroup = styled.div`
 `;
 
 const SummaryList = styled.div`
-  /* background-color: lightblue; */
   position: absolute;
-  top: 4rem;
+  top: var(--main-button-height);
   bottom: 0;
   width: 100%;
 

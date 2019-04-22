@@ -4,6 +4,9 @@ import styled from "styled-components";
 const StyledButton = styled.button`
   width: 50%;
   height: 100%;
+  letter-spacing: inherit;
+  font-family: inherit;
+
   background-color: ${({ focus }) => (focus ? "inherit" : "lightblue")};
   border: ${({ focus }) => (focus ? "none" : "2px solid black")};
   border-top: none;

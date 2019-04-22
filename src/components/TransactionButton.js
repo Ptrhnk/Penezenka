@@ -12,17 +12,18 @@ const NiceButton = styled.button`
   border-radius: 50%;
   margin-right: 1rem;
   outline: none;
+  box-shadow: var(--primary-shadow);
 
   background-color: ${({ level }) => {
     switch (level) {
       case "danger":
         return "rgba(256, 0, 15, .7)";
       case "warning":
-        return "rgba(252, 213, 74)";
+        return "rgb(252, 213, 74)";
       case "success":
-        return "rgba(70, 255, 155)";
+        return "rgb(70, 255, 155)";
       case "info":
-        return "rgba(216, 238, 255)";
+        return "rgb(216, 238, 255)";
       default:
         return "rgb(255, 255, 255)";
     }

@@ -8,7 +8,7 @@ const Box = styled.div`
   margin: 1rem 1rem;
   border: 2px solid black;
   border-radius: 1rem;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--primary-shadow);
 
   display: flex;
   justify-content: center;

@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import TransactionButton from "./TransactionButton";
+// Icons
 import deleteIcon from "./../icons/delete.svg";
 import editIcon from "./../icons/edit.svg";
 
 const TransactionBox = styled.div`
-  background-color: rgba(216, 238, 255);
-  margin-bottom: 0.5rem;
-  border-radius: 5px;
-  border: 2px solid black;
+  background-color: rgb(216, 238, 255);
   width: 100%;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--primary-shadow);
+  margin-bottom: var(--transaction-box-margin);
+  border-radius: 0.4rem;
+  /* border-bottom: 1px solid black; */
+  /* border: 2px solid black; */
 
   display: flex;
   align-items: center;
@@ -65,16 +67,19 @@ const TransactionRow = styled.div`
 `;
 
 const DetailedContainer = styled.div`
-  height: ${({ open }) => (open ? "2rem" : "0")};
+  height: ${({ open }) => (open ? "2.3rem" : "0")};
+  /* border-top: ${({ open }) => (open ? "1px dashed black" : "none")}; */
   width: 100%;
   overflow: hidden;
+
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   flex-direction: row;
   padding-left: 3rem;
   padding-right: 7rem;
   text-transform: lowercase;
-  transition: height 300ms ease;
+  transition: height 300ms ease-in-out;
 `;
 
 const Transaction = ({
