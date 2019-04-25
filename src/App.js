@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-
+// components
 import Transaction from "./components/Transaction";
 import FilterButton from "./components/FilterButton";
 import MainButton from "./components/MainButton";
@@ -169,7 +169,6 @@ const App = () => {
       name: "Výplata",
       type: "Příjem",
       created: "2.2.2019",
-      // value: 555,
       value: Math.floor(Math.random() * 20000),
       currency: "EUR"
     };
@@ -233,9 +232,9 @@ const App = () => {
           </>
         ) : (
           <SummaryList>
-            <SummaryBox />
-            <SummaryBox />
-            <SummaryBox />
+            <SummaryBox level={"in"} />
+            <SummaryBox level={"out"} />
+            <SummaryBox level={"all"} />
           </SummaryList>
         )}
       </Wallet>

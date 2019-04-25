@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+// Icons
+import arrowUp from "../icons/arrow_upward.svg";
+import arrowDown from "../icons/arrow_downward.svg";
 
 const Box = styled.div`
   height: 6rem;
@@ -16,8 +19,27 @@ const Box = styled.div`
   flex-shrink: 0;
 `;
 
-const SummaryBox = () => {
-  return <Box>dasd</Box>;
+const Icon = styled.img`
+  height: 1.8rem;
+  width: 1.8rem;
+`;
+
+const MarginLeft = styled.div`
+  margin-left: 0.5rem;
+`;
+
+const SummaryBox = ({ level, label }) => {
+  return (
+    <Box>
+      {(level === "in" || level === "all") && (
+        <Icon src={arrowUp} alt={label} />
+      )}
+      {(level === "out" || level === "all") && (
+        <Icon src={arrowDown} alt={label} />
+      )}
+      <MarginLeft>{level}</MarginLeft>
+    </Box>
+  );
 };
 
 export default SummaryBox;
