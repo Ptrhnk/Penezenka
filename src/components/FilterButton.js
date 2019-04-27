@@ -4,11 +4,10 @@ import styled from "styled-components";
 const StyledButton = styled.button`
   width: 3rem;
   height: 3rem;
-  margin: 0 1rem;
-  border: 2px solid black;
+  border: var(--primary-border);
   border-radius: 50%;
-  box-shadow: var(--primary-shadow);
-  background-color: #fff;
+  box-shadow: ${({ selected }) =>
+    selected ? "inset var(--primary-shadow)" : "var(--primary-shadow)"};
   outline: none;
 
   display: flex;
@@ -22,9 +21,9 @@ const Icon = styled.img`
   width: 1.8rem;
 `;
 
-const FilterButton = ({ label, icon }) => {
+const FilterButton = ({ label, icon, onClick, selected }) => {
   return (
-    <StyledButton>
+    <StyledButton onClick={onClick} selected={selected}>
       <Icon src={icon} alt={label} />
     </StyledButton>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import addIcon from "./../icons/add.svg";
 
 const BigButton = styled.button`
   /* margin: 0 1rem; */
@@ -18,7 +17,7 @@ const BigButton = styled.button`
   justify-content: center;
   align-items: center;
 
-  border: 2px solid black;
+  border: var(--primary-border);
   outline: none;
 `;
 
@@ -28,13 +27,13 @@ const Icon = styled.img`
   margin-right: 0.5rem;
 `;
 
-const TransactionButton = ({ label, onClick }) => {
+const WideButton = ({ label, onClick, icon }) => {
   return (
     <BigButton onClick={onClick}>
-      <Icon src={addIcon} alt={label} />
-      <h2>Add new</h2>
+      {icon && <Icon src={icon} alt={label} />}
+      <h2>{label}</h2>
     </BigButton>
   );
 };
 
-export default TransactionButton;
+export default WideButton;

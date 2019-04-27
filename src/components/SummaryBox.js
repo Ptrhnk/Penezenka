@@ -9,7 +9,7 @@ const Box = styled.div`
   width: 80%;
   background-color: #fff;
   margin: 1rem 1rem;
-  border: 2px solid black;
+  border: var(--primary-border);
   border-radius: 1rem;
   box-shadow: var(--primary-shadow);
 

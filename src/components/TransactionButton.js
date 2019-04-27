@@ -8,7 +8,7 @@ const NiceButton = styled.button`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border: 2px solid black;
+  border: var(--primary-border);
   border-radius: 50%;
   margin-right: 1rem;
   outline: none;

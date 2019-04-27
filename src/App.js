@@ -1,16 +1,15 @@
 import React, { useState } from "react";
+import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 // components
-import Transaction from "./components/Transaction";
-import FilterButton from "./components/FilterButton";
-import MainButton from "./components/MainButton";
-import AddButton from "./components/AddButton";
-import SummaryBox from "./components/SummaryBox";
-// Icons
-import arrowUp from "./icons/arrow_upward.svg";
-import arrowDown from "./icons/arrow_downward.svg";
-import menuIcon from "./icons/menu_icon.svg";
+import TransactionList from "./components/TransactionList";
+import SummaryPage from "./components/SummaryPage";
+import FilterButtonGroup from "./components/FilterButtonGroup";
+import WideButton from "./components/WideButton";
+
+import AddIcon from "./icons/add.svg";
+import IntervalButtonGroup from "./components/IntervalButtonGroup";
 
 const GlobalStyle = createGlobalStyle`
   *, *::after, *::before {
@@ -34,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
     --filter-panel-height: 5rem;
     --add-button-height: 4rem;
     --transaction-box-margin: .7rem;
+    --primary-border: 2px solid black;
   }
 `;
 
@@ -53,25 +53,15 @@ const Wallet = styled.div`
   background-color: rgb(0, 169, 255);
 `;
 
-const MainButtonGroup = styled.div`
+const TopButtonGroup = styled.div`
   position: absolute;
   top: 0;
-  width: 100%;
-  height: var(--main-button-height);
-
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-
-const FilterButtonGroup = styled.div`
-  position: absolute;
-  top: var(--main-button-height);
   right: 0;
   width: 100%;
   height: var(--filter-panel-height);
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  border-bottom: var(--primary-border);
 
   display: flex;
   justify-content: space-around;
@@ -79,46 +69,33 @@ const FilterButtonGroup = styled.div`
   align-items: center;
 `;
 
-const TransactionList = styled.div`
+const Screen = styled.div`
   position: absolute;
-  /* calc main button height + filter panel height */
-  top: calc(var(--main-button-height) + var(--filter-panel-height));
+  top: var(--filter-panel-height);
   bottom: var(--add-button-height);
   left: 0;
   width: 100%;
   overflow-y: scroll;
   padding: var(--transaction-box-margin) var(--transaction-box-margin) 0
     var(--transaction-box-margin);
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
 
   display: flex;
+  /* justify-content: center; */
   flex-direction: column;
 `;
 
-const AddButtonGroup = styled.div`
+const BottomButtonGroup = styled.div`
   position: absolute;
   bottom: 0;
   width: 100%;
   height: var(--add-button-height);
   box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  border-top: var(--primary-border);
 
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const SummaryList = styled.div`
-  position: absolute;
-  top: var(--main-button-height);
-  bottom: 0;
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 `;
 
 const initialList = [
@@ -126,7 +103,7 @@ const initialList = [
     id: 1,
     name: "Nákup Albert",
     value: 1231,
-    type: "Příjem",
+    type: "in",
     created: "12.3.2018",
     currency: "CZK"
   },
@@ -134,7 +111,7 @@ const initialList = [
     id: 2,
     name: "Koncert",
     value: 343,
-    type: "Příjem",
+    type: "in",
     created: "30.1.2018",
     currency: "EUR"
   },
@@ -142,7 +119,7 @@ const initialList = [
     id: 3,
     name: "Mimořádné výdaje",
     value: 23,
-    type: "Výdaj",
+    type: "out",
     created: "2.3.2018",
     currency: "USD"
   },
@@ -150,15 +127,29 @@ const initialList = [
     id: 4,
     name: "Něco dalšího",
     value: 12323,
-    type: "Výdaj",
+    type: "out",
     created: "1.1.2018",
     currency: "USD"
   }
 ];
 
 const App = () => {
+  // actual list of transactions showed on screen
+  const [showedList, setShowedList] = useState(initialList);
+  // all transactions
   const [transactionList, setTransactionList] = useState(initialList);
-  const [transactionScreen, setTransactionScreen] = useState(true);
+  const [filter, setFilter] = useState("all");
+
+  const AddButton = () => (
+    <WideButton onClick={addTransaction} label={"Add new"} icon={AddIcon} />
+  );
+  const BackButton = props => (
+    <WideButton
+      onClick={() => props.history.push("/")}
+      label={"Back"}
+      // icon={AddIcon}
+    />
+  );
 
   const addTransaction = () => {
     const newId = transactionList.length
@@ -167,12 +158,15 @@ const App = () => {
     const newObject = {
       id: newId || 1,
       name: "Výplata",
-      type: "Příjem",
+      type: "in",
       created: "2.2.2019",
       value: Math.floor(Math.random() * 20000),
       currency: "EUR"
     };
-    setTransactionList([...transactionList, newObject]);
+    const newList = [...transactionList, newObject];
+    setTransactionList(newList);
+    // callback?
+    setShowedList(getFilteredTransactions(filter, newList));
   };
 
   const deleteTransaction = id => {
@@ -181,62 +175,70 @@ const App = () => {
     if (index !== -1) {
       array.splice(index, 1);
       setTransactionList(array);
+      // callback?
+      setShowedList(getFilteredTransactions(filter, array));
+    }
+  };
+
+  const filterTransactions = transactionType => {
+    setFilter(transactionType);
+    setShowedList(getFilteredTransactions(transactionType, transactionList));
+  };
+
+  const getFilteredTransactions = (transactionType, transactions) => {
+    if (transactionType !== "all") {
+      const filteredArray = transactions.filter(transaction => {
+        return transaction.type === transactionType;
+      });
+      return filteredArray;
+    } else {
+      return transactions;
     }
   };
 
   return (
     <Container>
       <GlobalStyle />
-
       <Wallet>
-        <MainButtonGroup>
-          <MainButton
-            label={"Transakce"}
-            onClick={() => setTransactionScreen(true)}
-            focus={transactionScreen}
-            leftButton
-          />
-          <MainButton
-            label={"Přehledy"}
-            onClick={() => setTransactionScreen(false)}
-            focus={!transactionScreen}
-          />
-        </MainButtonGroup>
-
-        {transactionScreen ? (
-          <>
-            <FilterButtonGroup>
-              <FilterButton label={"Příjmy"} icon={arrowUp} />
-              <FilterButton label={"Výdaje"} icon={arrowDown} />
-              <FilterButton label={"Vše"} icon={menuIcon} />
-            </FilterButtonGroup>
-            <TransactionList>
-              {transactionList
-                .map(({ id, name, value, type, created, currency }, key) => (
-                  <Transaction
-                    key={key}
-                    id={id}
-                    name={name}
-                    value={value}
-                    type={type}
-                    created={created}
-                    currency={currency}
-                    onDelete={() => deleteTransaction(id)}
-                  />
-                ))
-                .reverse()}
-            </TransactionList>
-            <AddButtonGroup>
-              <AddButton onClick={addTransaction} label={"Add new"} />
-            </AddButtonGroup>
-          </>
-        ) : (
-          <SummaryList>
-            <SummaryBox level={"in"} />
-            <SummaryBox level={"out"} />
-            <SummaryBox level={"all"} />
-          </SummaryList>
-        )}
+        <TopButtonGroup>
+          <Switch>
+            <Route path="/summary" component={IntervalButtonGroup} />
+            <Route
+              exact
+              path="/"
+              component={() => (
+                <FilterButtonGroup
+                  filterTransactions={filterTransactions}
+                  selected={filter}
+                />
+              )}
+            />
+            <Route render={() => <h1>this route does not exist</h1>} />
+          </Switch>
+        </TopButtonGroup>
+        <Screen>
+          <Switch>
+            <Route path="/summary" component={SummaryPage} />
+            <Route
+              exact
+              path="/"
+              component={() => (
+                <TransactionList
+                  transactionList={showedList}
+                  onDelete={deleteTransaction}
+                />
+              )}
+            />
+            <Route render={() => <h1>this route does not exist</h1>} />
+          </Switch>
+        </Screen>
+        <BottomButtonGroup>
+          <Switch>
+            <Route path="/summary" component={BackButton} />
+            <Route exact path="/" component={AddButton} />
+            <Route render={() => <h1>this route does not exist</h1>} />
+          </Switch>
+        </BottomButtonGroup>
       </Wallet>
     </Container>
   );
