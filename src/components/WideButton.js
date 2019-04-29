@@ -6,7 +6,9 @@ const BigButton = styled.button`
   width: 90%;
   height: 80%;
   border-radius: 5rem;
-  background-color: rgb(70, 255, 155);
+  /* background-color: rgb(70, 255, 155); */
+  background-color: ${({ bgColor }) =>
+    bgColor ? bgColor : "rgb(70, 255, 155)"};
   box-shadow: var(--primary-shadow);
 
   letter-spacing: inherit;
@@ -27,9 +29,9 @@ const Icon = styled.img`
   margin-right: 0.5rem;
 `;
 
-const WideButton = ({ label, onClick, icon }) => {
+const WideButton = ({ label, onClick, icon, bgColor }) => {
   return (
-    <BigButton onClick={onClick}>
+    <BigButton onClick={onClick} bgColor={bgColor}>
       {icon && <Icon src={icon} alt={label} />}
       <h2>{label}</h2>
     </BigButton>

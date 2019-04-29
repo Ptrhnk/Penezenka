@@ -8,18 +8,39 @@ const SummaryList = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #fff;
+  flex-shrink: 0;
+  margin-bottom: var(--transaction-box-margin);
+  height: 100%;
 `;
 
-const SummaryPage = () => {
+const SummaryPage = ({ transactions, interval }) => {
+  const getSum = (total, item) => total + item;
+
+  const getValues = transactions => {
+    const values = [0];
+    transactions.forEach(element => {
+      values.push(element.value);
+    });
+    return values;
+  };
+
+  const getSummary = type => {
+    if (type !== "all") {
+      const filteredArray = transactions.filter(
+        transaction => transaction.type === type
+      );
+      return getValues(filteredArray).reduce(getSum);
+    } else {
+      return getValues(transactions).reduce(getSum);
+    }
+  };
+
   return (
-    <div>
-      <SummaryList>
-        <SummaryBox level={"in"} />
-        <SummaryBox level={"out"} />
-        <SummaryBox level={"all"} />
-      </SummaryList>
-    </div>
+    <SummaryList>
+      <SummaryBox level={"in"} summary={getSummary("in")} />
+      <SummaryBox level={"out"} summary={getSummary("out")} />
+      <SummaryBox level={"all"} summary={getSummary("all")} />
+    </SummaryList>
   );
 };
 

@@ -5,10 +5,10 @@ const Button = styled.button`
   background-color: palevioletred;
   width: 5rem;
   height: 3rem;
-  /* margin: 0 1rem; */
   border: var(--primary-border);
   border-radius: 3rem;
-  box-shadow: var(--primary-shadow);
+  box-shadow: ${({ selected }) =>
+    selected ? "inset var(--primary-shadow)" : "var(--primary-shadow)"};
   background-color: #fff;
   outline: none;
   letter-spacing: inherit;
@@ -20,9 +20,9 @@ const Button = styled.button`
   flex-shrink: 0;
 `;
 
-const IntervalButton = ({ label, onClick }) => {
+const IntervalButton = ({ label, onClick, selected }) => {
   return (
-    <Button>
+    <Button selected={selected} onClick={onClick}>
       <h3>{label}</h3>
     </Button>
   );

@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+// init list
+import initialList from "./InitialList";
 // components
 import TransactionList from "./components/TransactionList";
 import SummaryPage from "./components/SummaryPage";
 import FilterButtonGroup from "./components/FilterButtonGroup";
-import WideButton from "./components/WideButton";
-
-import AddIcon from "./icons/add.svg";
 import IntervalButtonGroup from "./components/IntervalButtonGroup";
+import WideButton from "./components/WideButton";
+// icons
+import AddIcon from "./icons/add.svg";
+import BackIcon from "./icons/arrow_back.svg";
 
 const GlobalStyle = createGlobalStyle`
   *, *::after, *::before {
@@ -98,47 +101,13 @@ const BottomButtonGroup = styled.div`
   align-items: center;
 `;
 
-const initialList = [
-  {
-    id: 1,
-    name: "Nákup Albert",
-    value: 1231,
-    type: "in",
-    created: "12.3.2018",
-    currency: "CZK"
-  },
-  {
-    id: 2,
-    name: "Koncert",
-    value: 343,
-    type: "in",
-    created: "30.1.2018",
-    currency: "EUR"
-  },
-  {
-    id: 3,
-    name: "Mimořádné výdaje",
-    value: 23,
-    type: "out",
-    created: "2.3.2018",
-    currency: "USD"
-  },
-  {
-    id: 4,
-    name: "Něco dalšího",
-    value: 12323,
-    type: "out",
-    created: "1.1.2018",
-    currency: "USD"
-  }
-];
-
 const App = () => {
   // actual list of transactions showed on screen
   const [showedList, setShowedList] = useState(initialList);
   // all transactions
   const [transactionList, setTransactionList] = useState(initialList);
   const [filter, setFilter] = useState("all");
+  const [interval, setInterval] = useState("all");
 
   const AddButton = () => (
     <WideButton onClick={addTransaction} label={"Add new"} icon={AddIcon} />
@@ -147,7 +116,8 @@ const App = () => {
     <WideButton
       onClick={() => props.history.push("/")}
       label={"Back"}
-      // icon={AddIcon}
+      bgColor={"lightblue"}
+      icon={BackIcon}
     />
   );
 
@@ -158,9 +128,9 @@ const App = () => {
     const newObject = {
       id: newId || 1,
       name: "Výplata",
+      value: Math.floor(Math.random() * 20000),
       type: "in",
       created: "2.2.2019",
-      value: Math.floor(Math.random() * 20000),
       currency: "EUR"
     };
     const newList = [...transactionList, newObject];
@@ -180,7 +150,7 @@ const App = () => {
     }
   };
 
-  const filterTransactions = transactionType => {
+  const setTransactionFilter = transactionType => {
     setFilter(transactionType);
     setShowedList(getFilteredTransactions(transactionType, transactionList));
   };
@@ -196,19 +166,31 @@ const App = () => {
     }
   };
 
+  const setIntervalFilter = interval => {
+    setInterval(interval);
+  };
+
   return (
     <Container>
       <GlobalStyle />
       <Wallet>
         <TopButtonGroup>
           <Switch>
-            <Route path="/summary" component={IntervalButtonGroup} />
+            <Route
+              path="/summary"
+              component={() => (
+                <IntervalButtonGroup
+                  selected={interval}
+                  setIntervalFilter={setIntervalFilter}
+                />
+              )}
+            />
             <Route
               exact
               path="/"
               component={() => (
                 <FilterButtonGroup
-                  filterTransactions={filterTransactions}
+                  setTransactionFilter={setTransactionFilter}
                   selected={filter}
                 />
               )}
@@ -218,7 +200,15 @@ const App = () => {
         </TopButtonGroup>
         <Screen>
           <Switch>
-            <Route path="/summary" component={SummaryPage} />
+            <Route
+              path="/summary"
+              component={() => (
+                <SummaryPage
+                  transactions={transactionList}
+                  interval={interval}
+                />
+              )}
+            />
             <Route
               exact
               path="/"

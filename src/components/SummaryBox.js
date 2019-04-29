@@ -28,7 +28,7 @@ const MarginLeft = styled.div`
   margin-left: 0.5rem;
 `;
 
-const SummaryBox = ({ level, label }) => {
+const SummaryBox = ({ level, label, summary }) => {
   return (
     <Box>
       {(level === "in" || level === "all") && (
@@ -37,7 +37,7 @@ const SummaryBox = ({ level, label }) => {
       {(level === "out" || level === "all") && (
         <Icon src={arrowDown} alt={label} />
       )}
-      <MarginLeft>{level}</MarginLeft>
+      <MarginLeft>{summary} CZK</MarginLeft>
     </Box>
   );
 };

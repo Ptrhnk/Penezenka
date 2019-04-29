@@ -8,6 +8,7 @@ const StyledButton = styled.button`
   border-radius: 50%;
   box-shadow: ${({ selected }) =>
     selected ? "inset var(--primary-shadow)" : "var(--primary-shadow)"};
+  background-color: ${({ bgColor }) => (bgColor ? bgColor : "white")};
   outline: none;
 
   display: flex;
@@ -21,9 +22,9 @@ const Icon = styled.img`
   width: 1.8rem;
 `;
 
-const FilterButton = ({ label, icon, onClick, selected }) => {
+const FilterButton = ({ label, icon, onClick, selected, bgColor }) => {
   return (
-    <StyledButton onClick={onClick} selected={selected}>
+    <StyledButton onClick={onClick} selected={selected} bgColor={bgColor}>
       <Icon src={icon} alt={label} />
     </StyledButton>
   );
