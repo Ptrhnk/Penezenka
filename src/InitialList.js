@@ -1,7 +1,7 @@
 const initialList = [
   {
     id: 1,
-    name: "Nákup Albert",
+    name: "Vyplacení faktury",
     value: 1231,
     type: "in",
     created: "12.3.2018",
@@ -9,11 +9,11 @@ const initialList = [
   },
   {
     id: 2,
-    name: "Koncert",
+    name: "Výplata",
     value: 343,
     type: "in",
     created: "30.1.2018",
-    currency: "EUR"
+    currency: "CZK"
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ const initialList = [
     value: -23,
     type: "out",
     created: "2.3.2018",
-    currency: "USD"
+    currency: "CZK"
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ const initialList = [
     value: -12323,
     type: "out",
     created: "1.1.2018",
-    currency: "USD"
+    currency: "CZK"
   }
 ];
 

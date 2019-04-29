@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+// import ReactModal from "react-modal";
 // init list
 import initialList from "./InitialList";
 // components
@@ -10,6 +11,7 @@ import SummaryPage from "./components/SummaryPage";
 import FilterButtonGroup from "./components/FilterButtonGroup";
 import IntervalButtonGroup from "./components/IntervalButtonGroup";
 import WideButton from "./components/WideButton";
+import ReactModal from "./components/Modal";
 // icons
 import AddIcon from "./icons/add.svg";
 import BackIcon from "./icons/arrow_back.svg";
@@ -108,35 +110,37 @@ const App = () => {
   const [transactionList, setTransactionList] = useState(initialList);
   const [filter, setFilter] = useState("all");
   const [interval, setInterval] = useState("all");
+  const [modalOpened, setModalOpened] = useState(false);
 
   const AddButton = () => (
-    <WideButton onClick={addTransaction} label={"Add new"} icon={AddIcon} />
+    <WideButton
+      onClick={() => setModalOpened(true)}
+      label={"Add new"}
+      icon={AddIcon}
+    />
   );
   const BackButton = props => (
     <WideButton
       onClick={() => props.history.push("/")}
       label={"Back"}
-      bgColor={"lightblue"}
+      bgColor={"#00d4ff"}
       icon={BackIcon}
     />
   );
 
-  const addTransaction = () => {
+  const getParent = () => document.querySelector("#screen");
+
+  const addNewTransaction = transaction => {
     const newId = transactionList.length
       ? transactionList[transactionList.length - 1].id + 1
       : 1;
-    const newObject = {
-      id: newId || 1,
-      name: "Výplata",
-      value: Math.floor(Math.random() * 20000),
-      type: "in",
-      created: "2.2.2019",
-      currency: "EUR"
-    };
-    const newList = [...transactionList, newObject];
+    transaction.id = newId;
+    console.log(transaction);
+    const newList = [...transactionList, transaction];
     setTransactionList(newList);
     // callback?
     setShowedList(getFilteredTransactions(filter, newList));
+    setModalOpened(false);
   };
 
   const deleteTransaction = id => {
@@ -173,7 +177,7 @@ const App = () => {
   return (
     <Container>
       <GlobalStyle />
-      <Wallet>
+      <Wallet id={"wallet"}>
         <TopButtonGroup>
           <Switch>
             <Route
@@ -198,7 +202,7 @@ const App = () => {
             <Route render={() => <h1>this route does not exist</h1>} />
           </Switch>
         </TopButtonGroup>
-        <Screen>
+        <Screen id={"screen"}>
           <Switch>
             <Route
               path="/summary"
@@ -230,6 +234,13 @@ const App = () => {
           </Switch>
         </BottomButtonGroup>
       </Wallet>
+      <ReactModal
+        isOpen={modalOpened}
+        onRequestClose={() => setModalOpened(false)}
+        parentSelector={getParent}
+        addTransaction={addNewTransaction}
+        appElement={document.getElementById("screen")}
+      />
     </Container>
   );
 };

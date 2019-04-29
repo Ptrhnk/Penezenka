@@ -6,7 +6,6 @@ const BigButton = styled.button`
   width: 90%;
   height: 80%;
   border-radius: 5rem;
-  /* background-color: rgb(70, 255, 155); */
   background-color: ${({ bgColor }) =>
     bgColor ? bgColor : "rgb(70, 255, 155)"};
   box-shadow: var(--primary-shadow);

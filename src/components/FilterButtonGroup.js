@@ -34,7 +34,7 @@ const FilterButtonGroup = ({ setTransactionFilter, selected }) => {
         <FilterButton
           label={"Summary"}
           icon={summaryIcon}
-          bgColor={"lightblue"}
+          bgColor={"#00d4ff"}
         />
       </Link>
     </>
