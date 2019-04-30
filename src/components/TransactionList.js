@@ -1,6 +1,7 @@
 import React from "react";
 import Transaction from "./Transaction";
 
+// Change to transaction page
 const TransactionList = ({ transactionList, onDelete }) => {
   return (
     <>

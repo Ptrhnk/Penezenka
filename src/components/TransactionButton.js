@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { PRIMARY_SHADOW, PRIMARY_BORDER } from "../constants";
+import { primaryShadow, primaryBorder } from "../constants";
 
 const NiceButton = styled.button`
   width: 2rem;
@@ -9,11 +9,11 @@ const NiceButton = styled.button`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border: ${({ PRIMARY_BORDER }) => PRIMARY_BORDER};
+  border: ${primaryBorder};
   border-radius: 50%;
   margin-right: 1rem;
   outline: none;
-  box-shadow: ${({ PRIMARY_SHADOW }) => PRIMARY_SHADOW};
+  box-shadow: ${primaryShadow};
 
   background-color: ${({ level }) => {
     switch (level) {
@@ -37,12 +37,7 @@ const Icon = styled.img`
 
 const TransactionButton = ({ label, onClick, icon, level }) => {
   return (
-    <NiceButton
-      onClick={onClick}
-      level={level}
-      PRIMARY_SHADOW={PRIMARY_SHADOW}
-      PRIMARY_BORDER={PRIMARY_BORDER}
-    >
+    <NiceButton onClick={onClick} level={level}>
       <Icon src={icon} alt={label} />
     </NiceButton>
   );

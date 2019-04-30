@@ -10,35 +10,14 @@ import SummaryPage from "./components/SummaryPage";
 import FilterButtonGroup from "./components/FilterButtonGroup";
 import IntervalButtonGroup from "./components/IntervalButtonGroup";
 import WideButton from "./components/WideButton";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import ReactModal from "./components/Modal";
 // icons
 import AddIcon from "./icons/add.svg";
 import BackIcon from "./icons/arrow_back.svg";
 
-import { PRIMARY_BORDER } from "./constants";
-
-const GlobalStyle = createGlobalStyle`
-  *, *::after, *::before {
-      margin: 0;
-      padding: 0;
-      box-sizing: inherit;
-  }
-
-  body {
-    box-sizing: border-box;
-    color: ${props => (props.whiteColor ? "white" : "black")};
-    letter-spacing: 1px;
-
-    @import url('https://fonts.googleapis.com/css?family=Poppins');
-    font-family: 'Poppins', sans-serif;
-  }
-
-  :root {
-    --filter-panel-height: 5rem;
-    --add-button-height: 4rem;
-    --transaction-box-margin: .7rem;
-  }
-`;
+import { transactionBoxMargin, headerHeight, footerHeight } from "./constants";
 
 const Container = styled.div`
   background-color: black;
@@ -56,45 +35,17 @@ const Wallet = styled.div`
   background-color: rgb(0, 169, 255);
 `;
 
-const TopButtonGroup = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: var(--filter-panel-height);
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  border-bottom: ${({ PRIMARY_BORDER }) => PRIMARY_BORDER};
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-
 const Screen = styled.div`
   position: absolute;
-  top: var(--filter-panel-height);
-  bottom: var(--add-button-height);
+  top: ${headerHeight};
+  bottom: ${footerHeight};
   left: 0;
   width: 100%;
   overflow-y: scroll;
-  padding: var(--transaction-box-margin) var(--transaction-box-margin) 0
-    var(--transaction-box-margin);
+  padding: ${transactionBoxMargin} ${transactionBoxMargin} 0
+    ${transactionBoxMargin};
   display: flex;
   flex-direction: column;
-`;
-
-const BottomButtonGroup = styled.div`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: var(--add-button-height);
-  box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  border-top: ${({ PRIMARY_BORDER }) => PRIMARY_BORDER};
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const App = () => {
@@ -164,7 +115,7 @@ const App = () => {
       <GlobalStyle />
 
       <Wallet id={"wallet"}>
-        <TopButtonGroup PRIMARY_BORDER={PRIMARY_BORDER}>
+        <Header>
           <Switch>
             <Route
               path="/summary"
@@ -187,7 +138,7 @@ const App = () => {
             />
             <Route render={() => <h1>this route does not exist</h1>} />
           </Switch>
-        </TopButtonGroup>
+        </Header>
         <Screen id={"screen"}>
           <Switch>
             <Route
@@ -212,13 +163,13 @@ const App = () => {
             <Route render={() => <h1>this route does not exist</h1>} />
           </Switch>
         </Screen>
-        <BottomButtonGroup PRIMARY_BORDER={PRIMARY_BORDER}>
+        <Footer>
           <Switch>
             <Route path="/summary" component={BackButton} />
             <Route exact path="/" component={AddButton} />
             <Route render={() => <h1>this route does not exist</h1>} />
           </Switch>
-        </BottomButtonGroup>
+        </Footer>
       </Wallet>
       <ReactModal
         isOpen={modalOpened}
@@ -232,3 +183,20 @@ const App = () => {
 };
 
 export default App;
+
+const GlobalStyle = createGlobalStyle`
+  *, *::after, *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: inherit;
+  }
+
+  body {
+    box-sizing: border-box;
+    color: ${props => (props.whiteColor ? "white" : "black")};
+    letter-spacing: 1px;
+
+    @import url('https://fonts.googleapis.com/css?family=Poppins');
+    font-family: 'Poppins', sans-serif;
+  }
+`;

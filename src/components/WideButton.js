@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { PRIMARY_SHADOW, PRIMARY_BORDER } from "../constants";
+import { primaryShadow, primaryBorder } from "../constants";
 
 const BigButton = styled.button`
   width: 90%;
@@ -8,13 +8,13 @@ const BigButton = styled.button`
   border-radius: 5rem;
   background-color: ${({ bgColor }) =>
     bgColor ? bgColor : "rgb(70, 255, 155)"};
-  box-shadow: ${({ PRIMARY_SHADOW }) => PRIMARY_SHADOW};
+  box-shadow: ${primaryShadow};
   letter-spacing: inherit;
   font-family: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: ${({ PRIMARY_BORDER }) => PRIMARY_BORDER};
+  border: ${primaryBorder};
   outline: none;
 `;
 
@@ -26,12 +26,7 @@ const Icon = styled.img`
 
 const WideButton = ({ label, onClick, icon, bgColor }) => {
   return (
-    <BigButton
-      onClick={onClick}
-      bgColor={bgColor}
-      PRIMARY_SHADOW={PRIMARY_SHADOW}
-      PRIMARY_BORDER={PRIMARY_BORDER}
-    >
+    <BigButton onClick={onClick} bgColor={bgColor}>
       {icon && <Icon src={icon} alt={label} />}
       <h2>{label}</h2>
     </BigButton>

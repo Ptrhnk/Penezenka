@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import SummaryBox from "../components/SummaryBox";
+import { transactionBoxMargin } from "../constants";
 
 const SummaryList = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ const SummaryList = styled.div`
   align-items: center;
   flex-direction: column;
   flex-shrink: 0;
-  margin-bottom: var(--transaction-box-margin);
+  margin-bottom: ${transactionBoxMargin};
   height: 100%;
 `;
 

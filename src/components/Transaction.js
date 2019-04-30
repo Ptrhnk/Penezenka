@@ -6,28 +6,22 @@ import deleteIcon from "./../icons/delete.svg";
 import editIcon from "./../icons/edit.svg";
 import arrowUp from "../icons/arrow_upward.svg";
 import arrowDown from "../icons/arrow_downward.svg";
+import { transactionBoxMargin } from "../constants";
 
-import { PRIMARY_SHADOW } from "../constants";
+import { primaryShadow } from "../constants";
 
 const TransactionBox = styled.div`
   background-color: rgb(216, 238, 255);
   width: 100%;
-  box-shadow: ${({ PRIMARY_SHADOW }) => PRIMARY_SHADOW};
-  margin-bottom: var(--transaction-box-margin);
+  box-shadow: ${primaryShadow};
+  margin-bottom: ${transactionBoxMargin};
   border-radius: 0.4rem;
-
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   flex-shrink: 0;
-
   transition: all 2s linear;
-
-  /* :hover {
-    background-color: pink;
-    color: black;
-  } */
 `;
 
 const TransactionInfo = styled.div`
@@ -37,14 +31,14 @@ const TransactionInfo = styled.div`
   margin-right: 1.5rem;
 `;
 
-const Id = styled.div`
-  height: 3rem;
-  width: 3rem;
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center;
-  align-items: center;
-`;
+// const Id = styled.div`
+//   height: 3rem;
+//   width: 3rem;
+//   display: flex;
+//   flex-shrink: 0;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
 const Name = styled.div`
   position: absolute;
@@ -71,7 +65,6 @@ const DetailedContainer = styled.div`
   height: ${({ open }) => (open ? "2.3rem" : "0")};
   width: 100%;
   overflow: hidden;
-
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -102,7 +95,7 @@ const Transaction = ({
   const [open, setOpen] = useState(false);
 
   return (
-    <TransactionBox PRIMARY_SHADOW={PRIMARY_SHADOW}>
+    <TransactionBox>
       <TransactionRow>
         {/* <Id onClick={() => setOpen(!open)}>{id}</Id> */}
         <Icon src={type === "in" ? arrowUp : arrowDown} />

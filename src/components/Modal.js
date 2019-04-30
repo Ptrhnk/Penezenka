@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactModal from "react-modal";
 import styled from "styled-components";
-import { PRIMARY_SHADOW, PRIMARY_BORDER } from "../constants";
+import { primaryShadow, primaryBorder } from "../constants";
 
 const ModalBody = styled.div`
   height: 100%;
@@ -21,7 +21,7 @@ const ModalRestyle = {
   },
   content: {
     backgroundColor: "rgb(0, 169, 255)",
-    border: PRIMARY_BORDER,
+    border: primaryBorder,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -40,8 +40,8 @@ const StyledButton = styled.button`
   letter-spacing: inherit;
   background-color: rgb(70, 255, 155);
   border-radius: 2rem;
-  border: ${({ PRIMARY_BORDER }) => PRIMARY_BORDER};
-  box-shadow: ${({ PRIMARY_SHADOW }) => PRIMARY_SHADOW};
+  border: ${primaryBorder};
+  box-shadow: ${primaryShadow};
 `;
 
 const Modal = ({
@@ -133,11 +133,7 @@ const Modal = ({
           />
         </div>
         <br />
-        <StyledButton
-          onClick={() => addTransaction(createTransactionObject())}
-          PRIMARY_SHADOW={PRIMARY_SHADOW}
-          PRIMARY_BORDER={PRIMARY_BORDER}
-        >
+        <StyledButton onClick={() => addTransaction(createTransactionObject())}>
           Add transaction
         </StyledButton>
       </ModalBody>
