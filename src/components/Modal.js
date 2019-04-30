@@ -1,18 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactModal from "react-modal";
-import styled from "styled-components";
-import { primaryShadow, primaryBorder } from "../constants";
+import { primaryBorder } from "../constants";
 
-const ModalBody = styled.div`
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const ModalRestyle = {
+const customStyle = {
   overlay: {
+    // backgroundColor: "rgba(255, 255, 255, 0.7)",
     backgroundColor: "black",
     zIndex: "10000",
     display: "flex",
@@ -21,122 +13,33 @@ const ModalRestyle = {
   },
   content: {
     backgroundColor: "rgb(0, 169, 255)",
+    opacity: "1",
     border: primaryBorder,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "35%",
-    height: "40%",
-    marginLeft: "30%",
-    marginTop: "10%"
+    borderRadius: ".8rem",
+    width: "20rem",
+    height: "20rem",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
   }
 };
-
-const StyledButton = styled.button`
-  width: 8rem;
-  height: 2rem;
-  font-family: inherit;
-  color: inherit;
-  letter-spacing: inherit;
-  background-color: rgb(70, 255, 155);
-  border-radius: 2rem;
-  border: ${primaryBorder};
-  box-shadow: ${primaryShadow};
-`;
 
 const Modal = ({
   isOpen,
   onAfterOpen,
   onRequestClose,
   appElement,
-  addTransaction
+  component
 }) => {
-  const [name, setName] = useState("Transaction name");
-  const [value, setValue] = useState(0);
-  const [type, setType] = useState("in");
-
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2, "0");
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const yyyy = today.getFullYear();
-  const currentDate = `${yyyy}-${mm}-${dd}`;
-  const [created, setCreated] = useState(currentDate);
-
-  const getParent = () => document.querySelector("#wallet");
-
-  const createTransactionObject = () => {
-    const newValue = parseFloat(value);
-    const dateArray = created.split("-");
-    const parsedDate = `${dateArray[2]}.${dateArray[1]}.${dateArray[0]}`;
-    const newObject = {
-      name: name,
-      value: type === "in" ? newValue : -newValue,
-      type: type,
-      created: parsedDate,
-      currency: "CZK"
-    };
-    return newObject;
-  };
-
   return (
     <ReactModal
       isOpen={isOpen}
       onAfterOpen={onAfterOpen}
       onRequestClose={onRequestClose}
-      parentSelector={getParent}
       appElement={appElement}
-      style={ModalRestyle}
+      style={customStyle}
     >
-      <ModalBody>
-        <h3>Transaction details:</h3>
-        <div>
-          Name:{" "}
-          <input
-            onChange={event => setName(event.target.value)}
-            value={name}
-            type="text"
-          />
-        </div>
-        <div>
-          Value:{" "}
-          <input
-            onChange={event => setValue(event.target.value)}
-            value={value}
-            type="number"
-          />
-        </div>
-        <div>
-          Type:{" "}
-          <input
-            type="radio"
-            name="type"
-            value={"in"}
-            checked={type === "in"}
-            onChange={() => setType("in")}
-          />{" "}
-          In{" "}
-          <input
-            type="radio"
-            name="type"
-            value={"out"}
-            checked={type === "out"}
-            onChange={() => setType("out")}
-          />{" "}
-          Out
-        </div>
-        <div>
-          Created:{" "}
-          <input
-            onChange={event => setCreated(event.target.value)}
-            value={created}
-            type="date"
-          />
-        </div>
-        <br />
-        <StyledButton onClick={() => addTransaction(createTransactionObject())}>
-          Add transaction
-        </StyledButton>
-      </ModalBody>
+      {component}
     </ReactModal>
   );
 };

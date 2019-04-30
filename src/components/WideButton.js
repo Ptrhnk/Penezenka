@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { primaryShadow, primaryBorder } from "../constants";
+import { primaryShadow, primaryBorder, globalGreen } from "../constants";
 
 const BigButton = styled.button`
   width: 90%;
   height: 80%;
   border-radius: 5rem;
-  background-color: ${({ bgColor }) =>
-    bgColor ? bgColor : "rgb(70, 255, 155)"};
+  background-color: ${({ bgColor }) => (bgColor ? bgColor : globalGreen)};
   box-shadow: ${primaryShadow};
-  letter-spacing: inherit;
+  letter-spacing: 0.2rem;
+  text-transform: capitalize;
   font-family: inherit;
   display: flex;
   justify-content: center;

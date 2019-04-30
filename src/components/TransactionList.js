@@ -1,26 +1,11 @@
 import React from "react";
 import Transaction from "./Transaction";
 
-// Change to transaction page
-const TransactionList = ({ transactionList, onDelete }) => {
-  return (
-    <>
-      {transactionList
-        .map(({ id, name, value, type, created, currency }, key) => (
-          <Transaction
-            key={key}
-            id={id}
-            name={name}
-            value={value}
-            type={type}
-            created={created}
-            currency={currency}
-            onDelete={() => onDelete(id)}
-          />
-        ))
-        .reverse()}
-    </>
-  );
-};
+const TransactionList = ({ transactions, onDelete }) =>
+  transactions
+    .map((transaction, key) => (
+      <Transaction key={key} data={transaction} onDelete={onDelete} />
+    ))
+    .reverse();
 
 export default TransactionList;

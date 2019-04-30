@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { primaryBorder, headerHeight } from "../constants";
+import { primaryBorder, headerHeight } from "../../constants";
 
 const Header = styled.div`
   position: absolute;

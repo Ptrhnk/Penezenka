@@ -83,26 +83,18 @@ const Icon = styled.img`
   margin-right: 0.5rem;
 `;
 
-const Transaction = ({
-  id,
-  name,
-  value,
-  type,
-  created,
-  currency,
-  onDelete
-}) => {
+const Transaction = ({ id, name, data, onDelete }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <TransactionBox>
       <TransactionRow>
         {/* <Id onClick={() => setOpen(!open)}>{id}</Id> */}
-        <Icon src={type === "in" ? arrowUp : arrowDown} />
+        <Icon src={data.type === "in" ? arrowUp : arrowDown} />
         <TransactionInfo onClick={() => setOpen(!open)}>
-          <Name>{name}</Name>
+          <Name>{data.name}</Name>
           <Price>
-            {value} {currency}
+            {data.value} {data.currency}
           </Price>
         </TransactionInfo>
         <TransactionButton
@@ -113,14 +105,14 @@ const Transaction = ({
         />
         <TransactionButton
           level={"danger"}
-          onClick={onDelete}
+          onClick={() => onDelete(data.id)}
           label={"delete"}
           icon={deleteIcon}
         />
       </TransactionRow>
       <DetailedContainer open={open} onClick={() => setOpen(!open)}>
-        <div>{created}</div>
-        <div>( {type} )</div>
+        <div>{data.created}</div>
+        <div>( {data.type} )</div>
       </DetailedContainer>
     </TransactionBox>
   );

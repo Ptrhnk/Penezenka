@@ -8,8 +8,7 @@ const withTransactions = WrappedComponent => {
     return (
       <WrappedComponent
         transactions={transactions}
-        {...this.state}
-        {...this.props}
+        setTransactions={setTransactions}
       />
     );
   };
