@@ -1,24 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import { PRIMARY_SHADOW, PRIMARY_BORDER } from "../constants";
 
 const BigButton = styled.button`
-  /* margin: 0 1rem; */
   width: 90%;
   height: 80%;
   border-radius: 5rem;
   background-color: ${({ bgColor }) =>
     bgColor ? bgColor : "rgb(70, 255, 155)"};
-  box-shadow: var(--primary-shadow);
-
+  box-shadow: ${({ PRIMARY_SHADOW }) => PRIMARY_SHADOW};
   letter-spacing: inherit;
   font-family: inherit;
-  /* text-transform: uppercase; */
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-  border: var(--primary-border);
+  border: ${({ PRIMARY_BORDER }) => PRIMARY_BORDER};
   outline: none;
 `;
 
@@ -30,7 +26,12 @@ const Icon = styled.img`
 
 const WideButton = ({ label, onClick, icon, bgColor }) => {
   return (
-    <BigButton onClick={onClick} bgColor={bgColor}>
+    <BigButton
+      onClick={onClick}
+      bgColor={bgColor}
+      PRIMARY_SHADOW={PRIMARY_SHADOW}
+      PRIMARY_BORDER={PRIMARY_BORDER}
+    >
       {icon && <Icon src={icon} alt={label} />}
       <h2>{label}</h2>
     </BigButton>

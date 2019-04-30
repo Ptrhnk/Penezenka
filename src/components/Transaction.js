@@ -7,14 +7,14 @@ import editIcon from "./../icons/edit.svg";
 import arrowUp from "../icons/arrow_upward.svg";
 import arrowDown from "../icons/arrow_downward.svg";
 
+import { PRIMARY_SHADOW } from "../constants";
+
 const TransactionBox = styled.div`
   background-color: rgb(216, 238, 255);
   width: 100%;
-  box-shadow: var(--primary-shadow);
+  box-shadow: ${({ PRIMARY_SHADOW }) => PRIMARY_SHADOW};
   margin-bottom: var(--transaction-box-margin);
   border-radius: 0.4rem;
-  /* border-bottom: 1px solid black; */
-  /* border: var(--primary-border); */
 
   display: flex;
   align-items: center;
@@ -35,7 +35,6 @@ const TransactionInfo = styled.div`
   width: 100%;
   height: 3rem;
   margin-right: 1.5rem;
-  /* background-color: purple; */
 `;
 
 const Id = styled.div`
@@ -77,8 +76,8 @@ const DetailedContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: row;
-  padding-left: 3rem;
-  padding-right: 7rem;
+  padding-left: 2.8rem;
+  padding-right: 7.5rem;
   text-transform: lowercase;
   transition: height 300ms ease-in-out;
 `;
@@ -87,7 +86,8 @@ const Icon = styled.img`
   height: 1.5rem;
   width: 1.5rem;
   flex-shrink: 0;
-  margin: 0 0.5rem;
+  margin-left: 0.8rem;
+  margin-right: 0.5rem;
 `;
 
 const Transaction = ({
@@ -99,13 +99,12 @@ const Transaction = ({
   currency,
   onDelete
 }) => {
-  // change to false
   const [open, setOpen] = useState(false);
 
   return (
-    <TransactionBox>
+    <TransactionBox PRIMARY_SHADOW={PRIMARY_SHADOW}>
       <TransactionRow>
-        <Id onClick={() => setOpen(!open)}>{id}</Id>
+        {/* <Id onClick={() => setOpen(!open)}>{id}</Id> */}
         <Icon src={type === "in" ? arrowUp : arrowDown} />
         <TransactionInfo onClick={() => setOpen(!open)}>
           <Name>{name}</Name>

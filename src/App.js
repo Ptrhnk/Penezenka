@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-// import ReactModal from "react-modal";
 // init list
 import initialList from "./InitialList";
 // components
@@ -16,12 +15,15 @@ import ReactModal from "./components/Modal";
 import AddIcon from "./icons/add.svg";
 import BackIcon from "./icons/arrow_back.svg";
 
+import { PRIMARY_BORDER } from "./constants";
+
 const GlobalStyle = createGlobalStyle`
   *, *::after, *::before {
       margin: 0;
       padding: 0;
       box-sizing: inherit;
   }
+
   body {
     box-sizing: border-box;
     color: ${props => (props.whiteColor ? "white" : "black")};
@@ -30,15 +32,11 @@ const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Poppins');
     font-family: 'Poppins', sans-serif;
   }
-  /* Variables */
+
   :root {
-    --primary-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
-    --transaction-box-margin: 1rem;
-    --main-button-height: 4rem;
     --filter-panel-height: 5rem;
     --add-button-height: 4rem;
     --transaction-box-margin: .7rem;
-    --primary-border: 2px solid black;
   }
 `;
 
@@ -66,11 +64,9 @@ const TopButtonGroup = styled.div`
   height: var(--filter-panel-height);
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  border-bottom: var(--primary-border);
-
+  border-bottom: ${({ PRIMARY_BORDER }) => PRIMARY_BORDER};
   display: flex;
   justify-content: space-around;
-  /* justify-content: center; */
   align-items: center;
 `;
 
@@ -83,9 +79,7 @@ const Screen = styled.div`
   overflow-y: scroll;
   padding: var(--transaction-box-margin) var(--transaction-box-margin) 0
     var(--transaction-box-margin);
-
   display: flex;
-  /* justify-content: center; */
   flex-direction: column;
 `;
 
@@ -96,7 +90,7 @@ const BottomButtonGroup = styled.div`
   height: var(--add-button-height);
   box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  border-top: var(--primary-border);
+  border-top: ${({ PRIMARY_BORDER }) => PRIMARY_BORDER};
 
   display: flex;
   justify-content: center;
@@ -104,9 +98,7 @@ const BottomButtonGroup = styled.div`
 `;
 
 const App = () => {
-  // actual list of transactions showed on screen
   const [showedList, setShowedList] = useState(initialList);
-  // all transactions
   const [transactionList, setTransactionList] = useState(initialList);
   const [filter, setFilter] = useState("all");
   const [interval, setInterval] = useState("all");
@@ -119,6 +111,7 @@ const App = () => {
       icon={AddIcon}
     />
   );
+
   const BackButton = props => (
     <WideButton
       onClick={() => props.history.push("/")}
@@ -130,28 +123,23 @@ const App = () => {
 
   const getParent = () => document.querySelector("#screen");
 
-  const addNewTransaction = transaction => {
+  const addTransaction = transaction => {
     const newId = transactionList.length
       ? transactionList[transactionList.length - 1].id + 1
       : 1;
-    transaction.id = newId;
-    console.log(transaction);
     const newList = [...transactionList, transaction];
+
+    transaction.id = newId;
+
     setTransactionList(newList);
-    // callback?
     setShowedList(getFilteredTransactions(filter, newList));
     setModalOpened(false);
   };
 
   const deleteTransaction = id => {
-    const array = [...transactionList];
-    const index = array.findIndex(x => x.id === id);
-    if (index !== -1) {
-      array.splice(index, 1);
-      setTransactionList(array);
-      // callback?
-      setShowedList(getFilteredTransactions(filter, array));
-    }
+    const array = transactionList.filter(transaction => transaction.id !== id);
+    setTransactionList(array);
+    setShowedList(getFilteredTransactions(filter, array));
   };
 
   const setTransactionFilter = transactionType => {
@@ -161,24 +149,22 @@ const App = () => {
 
   const getFilteredTransactions = (transactionType, transactions) => {
     if (transactionType !== "all") {
-      const filteredArray = transactions.filter(transaction => {
-        return transaction.type === transactionType;
-      });
-      return filteredArray;
+      return transactions.filter(
+        transaction => transaction.type === transactionType
+      );
     } else {
       return transactions;
     }
   };
 
-  const setIntervalFilter = interval => {
-    setInterval(interval);
-  };
+  const setIntervalFilter = interval => setInterval(interval);
 
   return (
     <Container>
       <GlobalStyle />
+
       <Wallet id={"wallet"}>
-        <TopButtonGroup>
+        <TopButtonGroup PRIMARY_BORDER={PRIMARY_BORDER}>
           <Switch>
             <Route
               path="/summary"
@@ -226,7 +212,7 @@ const App = () => {
             <Route render={() => <h1>this route does not exist</h1>} />
           </Switch>
         </Screen>
-        <BottomButtonGroup>
+        <BottomButtonGroup PRIMARY_BORDER={PRIMARY_BORDER}>
           <Switch>
             <Route path="/summary" component={BackButton} />
             <Route exact path="/" component={AddButton} />
@@ -238,7 +224,7 @@ const App = () => {
         isOpen={modalOpened}
         onRequestClose={() => setModalOpened(false)}
         parentSelector={getParent}
-        addTransaction={addNewTransaction}
+        addTransaction={addTransaction}
         appElement={document.getElementById("screen")}
       />
     </Container>

@@ -4,14 +4,16 @@ import styled from "styled-components";
 import arrowUp from "../icons/arrow_upward.svg";
 import arrowDown from "../icons/arrow_downward.svg";
 
+import { PRIMARY_SHADOW, PRIMARY_BORDER } from "../constants";
+
 const Box = styled.div`
   height: 6rem;
   width: 80%;
   background-color: #fff;
   margin: 1rem 1rem;
-  border: var(--primary-border);
+  border: ${({ PRIMARY_BORDER }) => PRIMARY_BORDER};
   border-radius: 1rem;
-  box-shadow: var(--primary-shadow);
+  box-shadow: ${({ PRIMARY_SHADOW }) => PRIMARY_SHADOW};
 
   display: flex;
   justify-content: center;
@@ -30,7 +32,7 @@ const MarginLeft = styled.div`
 
 const SummaryBox = ({ level, label, summary }) => {
   return (
-    <Box>
+    <Box PRIMARY_SHADOW={PRIMARY_SHADOW} PRIMARY_BORDER={PRIMARY_BORDER}>
       {(level === "in" || level === "all") && (
         <Icon src={arrowUp} alt={label} />
       )}
