@@ -5,8 +5,7 @@ import { primaryBorder } from "../constants";
 
 const customStyle = {
   overlay: {
-    backgroundColor: "rgba(255, 255, 255, 0.7)",
-    // backgroundColor: "black",
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
     zIndex: "10000",
     display: "flex",
     justifyContent: "center",
@@ -39,6 +38,7 @@ const Modal = ({
       onRequestClose={onRequestClose}
       appElement={appElement}
       style={customStyle}
+      closeTimeoutMS={300}
     >
       {component}
     </ReactModal>
