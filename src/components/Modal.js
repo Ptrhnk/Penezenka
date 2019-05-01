@@ -1,11 +1,12 @@
 import React from "react";
 import ReactModal from "react-modal";
+
 import { primaryBorder } from "../constants";
 
 const customStyle = {
   overlay: {
-    // backgroundColor: "rgba(255, 255, 255, 0.7)",
-    backgroundColor: "black",
+    backgroundColor: "rgba(255, 255, 255, 0.7)",
+    // backgroundColor: "black",
     zIndex: "10000",
     display: "flex",
     justifyContent: "center",

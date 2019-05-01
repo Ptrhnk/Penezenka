@@ -10,14 +10,14 @@ import { globalBlue } from "./constants";
 const Container = styled.div`
   background-color: black;
   height: 100vh;
-
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 `;
 
 const Wallet = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 40%;
   height: 100%;
   background-color: ${globalBlue};
@@ -29,6 +29,7 @@ const App = () => {
     <BrowserRouter>
       <Container>
         <GlobalStyle />
+
         <Wallet>
           <Switch>
             <Route path="/summary" component={SummaryPage} />
@@ -44,6 +45,10 @@ const App = () => {
 export default App;
 
 const GlobalStyle = createGlobalStyle`
+  html {
+    scroll-behavior: smooth;
+  }
+
   *, *::after, *::before {
       margin: 0;
       padding: 0;
@@ -52,7 +57,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     box-sizing: border-box;
-    color: ${props => (props.whiteColor ? "white" : "black")};
+    color: ${props => (props.paleviolet ? "palevioletred" : "black")};
     letter-spacing: 1px;
 
     @import url('https://fonts.googleapis.com/css?family=Poppins');
