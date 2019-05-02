@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 
 import SummaryBox from "../SummaryBox";
-import withTransactions from "../withTransactions";
+// import withTransactions from "../withTransactions";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import Content from "../layout/Content";
 import IntervalButtonGroup from "../IntervalButtonGroup";
 import WideButton from "../WideButton";
 import BackIcon from "../../icons/arrow_back.svg";
+import { getTransactions } from "../lib/getTransactions";
 
 import { transactionBoxMargin, globalLightBlue } from "../../constants";
 
@@ -23,15 +24,22 @@ const SummaryList = styled.div`
   height: 100%;
 `;
 
-const SummaryPage = ({ transactions, history }) => {
+const SummaryPage = ({ history }) => {
   const [interval, setInterval] = useState("all");
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    getTransactions().then(setTransactions);
+  }, []);
 
   const getSum = (total, item) => total + item;
 
   const getValues = transactions => {
     const values = [0];
-    transactions.forEach(element => {
-      values.push(element.value);
+    transactions.forEach(transaction => {
+      values.push(
+        transaction.type === "in" ? transaction.value : -transaction.value
+      );
     });
     return values;
   };
@@ -75,4 +83,4 @@ const SummaryPage = ({ transactions, history }) => {
   );
 };
 
-export default withTransactions(withRouter(SummaryPage));
+export default withRouter(SummaryPage);

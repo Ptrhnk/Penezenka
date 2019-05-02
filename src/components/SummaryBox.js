@@ -39,7 +39,10 @@ const SummaryBox = ({ level, label, summary }) => {
       {(level === "out" || level === "all") && (
         <Icon src={arrowDown} alt={label} />
       )}
-      <MarginLeft>{summary} CZK</MarginLeft>
+      <MarginLeft>
+        {/* {level !== "all" && (level === "in" ? "+" : "-")}  */}
+        {summary} CZK
+      </MarginLeft>
     </Box>
   );
 };

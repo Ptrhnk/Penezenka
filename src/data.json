@@ -1,0 +1,68 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "name": "Vyplacení faktury",
+      "value": 1231,
+      "type": "in",
+      "created": "12.3.2018",
+      "currency": "CZK"
+    },
+    {
+      "name": "ahoj",
+      "value": 123,
+      "type": "in",
+      "created": "02.05.2019",
+      "currency": "CZK",
+      "id": 9
+    },
+    {
+      "name": "Transaction name",
+      "value": 1234,
+      "type": "out",
+      "created": "02.05.2019",
+      "currency": "CZK",
+      "id": 10
+    },
+    {
+      "name": "Transaction name",
+      "value": 50,
+      "type": "in",
+      "created": "02.05.2019",
+      "currency": "CZK",
+      "id": 12
+    },
+    {
+      "name": "Transaction name",
+      "value": 200,
+      "type": "in",
+      "created": "02.05.2019",
+      "currency": "CZK",
+      "id": 13
+    },
+    {
+      "name": "Transaction name",
+      "value": 0,
+      "type": "in",
+      "created": "02.05.2019",
+      "currency": "CZK",
+      "id": 14
+    },
+    {
+      "name": "alkfnsad",
+      "value": 42342,
+      "type": "out",
+      "created": "02.05.2019",
+      "currency": "CZK",
+      "id": 15
+    },
+    {
+      "name": "ads",
+      "value": 324,
+      "type": "out",
+      "created": "02.05.2019",
+      "currency": "CZK",
+      "id": 16
+    }
+  ]
+}

@@ -40,17 +40,23 @@ const StyledButton = styled.button`
   outline: none;
 `;
 
-const TransactionForm = ({ addTransaction }) => {
-  const [name, setName] = useState("Transaction name");
-  const [value, setValue] = useState(0);
-  const [type, setType] = useState("in");
+const TransactionForm = ({ transaction, confirm }) => {
+  const getCurrentDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    return `${yyyy}-${mm}-${dd}`;
+  };
 
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2, "0");
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const yyyy = today.getFullYear();
-  const currentDate = `${yyyy}-${mm}-${dd}`;
-  const [created, setCreated] = useState(currentDate);
+  const [name, setName] = useState(
+    transaction ? transaction.name : "Transaction name"
+  );
+  const [value, setValue] = useState(transaction ? transaction.value : 0);
+  const [type, setType] = useState(transaction ? transaction.type : "in");
+  const [created, setCreated] = useState(
+    transaction ? transaction.created : getCurrentDate
+  );
 
   const createTransactionObject = () => {
     const newValue = parseFloat(value);
@@ -58,7 +64,7 @@ const TransactionForm = ({ addTransaction }) => {
     const parsedDate = `${dateArray[2]}.${dateArray[1]}.${dateArray[0]}`;
     const newObject = {
       name: name,
-      value: type === "in" ? newValue : -newValue,
+      value: newValue,
       type: type,
       created: parsedDate,
       currency: "CZK"
@@ -112,7 +118,7 @@ const TransactionForm = ({ addTransaction }) => {
           type="date"
         />
       </Row>
-      <StyledButton onClick={() => addTransaction(createTransactionObject())}>
+      <StyledButton onClick={() => confirm(createTransactionObject())}>
         Add transaction
       </StyledButton>
     </Form>

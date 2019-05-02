@@ -83,23 +83,23 @@ const Icon = styled.img`
   margin-right: 0.5rem;
 `;
 
-const Transaction = ({ id, name, data, onDelete }) => {
+const Transaction = ({ data, onDelete, onEdit }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <TransactionBox>
       <TransactionRow>
-        {/* <Id onClick={() => setOpen(!open)}>{id}</Id> */}
+        {/* <Id onClick={() => setOpen(!open)}>{data.id}</Id> */}
         <Icon src={data.type === "in" ? arrowUp : arrowDown} />
         <TransactionInfo onClick={() => setOpen(!open)}>
           <Name>{data.name}</Name>
           <Price>
-            {data.value} {data.currency}
+            {data.type === "in" ? "+" : "-"} {data.value} {data.currency}
           </Price>
         </TransactionInfo>
         <TransactionButton
           level={"warning"}
-          onClick={() => console.log("edit")}
+          onClick={() => onEdit(data)}
           label={"edit"}
           icon={editIcon}
         />
