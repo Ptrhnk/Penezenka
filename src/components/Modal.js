@@ -38,7 +38,7 @@ const Modal = ({
       onRequestClose={onRequestClose}
       appElement={appElement}
       style={customStyle}
-      closeTimeoutMS={300}
+      closeTimeoutMS={200}
     >
       {component}
     </ReactModal>

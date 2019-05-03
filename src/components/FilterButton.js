@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import { primaryShadow, primaryBorder } from "../constants";
 
 const StyledButton = styled.button`
@@ -11,7 +12,6 @@ const StyledButton = styled.button`
     selected ? `inset ${primaryShadow}` : primaryShadow};
   background-color: ${({ bgColor }) => (bgColor ? bgColor : "white")};
   outline: none;
-
   display: flex;
   justify-content: center;
   align-items: center;

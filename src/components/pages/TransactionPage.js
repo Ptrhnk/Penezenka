@@ -15,10 +15,19 @@ import {
 import Modal from "../Modal";
 import AddIcon from "../../icons/add.svg";
 
+const initTransaction = {
+  name: "Název transakce",
+  value: 0,
+  type: "in",
+  created: "12.3.2018",
+  currency: "CZK"
+};
+
 const TransactionPage = () => {
   const [transactionList, setTransactionList] = useState([]);
   const [filter, setFilter] = useState("all");
   const [modalOpened, setModalOpened] = useState(false);
+  const [transactionForm, setTransactionForm] = useState(initTransaction);
 
   useEffect(() => {
     getTransactions().then(setTransactionList);
@@ -49,6 +58,16 @@ const TransactionPage = () => {
     }
   };
 
+  const handleEditButton = object => {
+    setTransactionForm(object);
+    setModalOpened(true);
+  };
+
+  const handleAddButton = () => {
+    setTransactionForm(initTransaction);
+    setModalOpened(true);
+  };
+
   return (
     <>
       <Header>
@@ -62,12 +81,12 @@ const TransactionPage = () => {
         <TransactionList
           transactions={getFilteredTransactions()}
           onDelete={deleteTransaction}
-          onEdit={updateTransaction}
+          onEdit={handleEditButton}
         />
       </Content>
       <Footer>
         <WideButton
-          onClick={() => setModalOpened(true)}
+          onClick={handleAddButton}
           label={"add transaction"}
           icon={AddIcon}
         />
@@ -76,7 +95,12 @@ const TransactionPage = () => {
         isOpen={modalOpened}
         onRequestClose={() => setModalOpened(false)}
         appElement={document.getElementById("screen")}
-        component={<TransactionForm confirm={addTransaction} />}
+        component={
+          <TransactionForm
+            confirm={addTransaction}
+            transaction={transactionForm}
+          />
+        }
       />
     </>
   );
