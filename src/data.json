@@ -9,14 +9,6 @@
       "currency": "CZK"
     },
     {
-      "name": "ahoj",
-      "value": 123,
-      "type": "in",
-      "created": "02.05.2019",
-      "currency": "CZK",
-      "id": 9
-    },
-    {
       "name": "Transaction name",
       "value": 1234,
       "type": "out",
@@ -31,14 +23,6 @@
       "created": "02.05.2019",
       "currency": "CZK",
       "id": 16
-    },
-    {
-      "name": "Necum",
-      "value": 666,
-      "type": "out",
-      "created": "06.06.2006",
-      "currency": "CZK",
-      "id": 20
     },
     {
       "name": "Vyplacení faktury",
@@ -57,36 +41,20 @@
       "id": 24
     },
     {
-      "name": "Necum",
-      "value": 666,
-      "type": "in",
-      "created": "6.6.2006",
-      "currency": "CZK",
-      "id": 25
-    },
-    {
       "name": "Název transakce",
-      "value": 0,
-      "type": "out",
-      "created": "6.5.2019",
-      "currency": "CZK",
-      "id": 26
-    },
-    {
-      "name": "edrw",
-      "value": 213,
-      "type": "out",
-      "created": "6.5.2019",
-      "currency": "CZK",
-      "id": 27
-    },
-    {
-      "name": "Název transakce",
-      "value": 123,
+      "value": 2423,
       "type": "in",
       "created": "6.5.2019",
       "currency": "CZK",
       "id": 28
+    },
+    {
+      "name": "KSLDJOE",
+      "value": 3213,
+      "type": "in",
+      "created": "6.5.2019",
+      "currency": "CZK",
+      "id": 29
     }
   ]
 }

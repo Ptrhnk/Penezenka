@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import Content from "../layout/Content";
 import IntervalButtonGroup from "../IntervalButtonGroup";
 import WideButton from "../WideButton";
 import BackIcon from "../../icons/arrow_back.svg";
-import { getTransactions } from "../lib/getTransactions";
+import useTransactions from "./useTransactions";
 
 import { transactionBoxMargin, globalLightBlue } from "../../constants";
 
@@ -26,11 +26,7 @@ const SummaryList = styled.div`
 
 const SummaryPage = ({ history }) => {
   const [interval, setInterval] = useState("all");
-  const [transactions, setTransactions] = useState([]);
-
-  useEffect(() => {
-    getTransactions().then(setTransactions);
-  }, []);
+  const [transactions, setTransactions] = useTransactions();
 
   const getSum = (total, item) => total + item;
 

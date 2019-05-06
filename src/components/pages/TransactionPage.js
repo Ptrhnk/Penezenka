@@ -15,40 +15,41 @@ import {
 } from "../lib/getTransactions";
 import Modal from "../Modal";
 import AddIcon from "../../icons/add.svg";
+import useTransactions from "./useTransactions";
 
 const TransactionPage = () => {
-  const [transactionList, setTransactionList] = useState([]);
+  const [transactions, setTransactions] = useTransactions();
   const [filter, setFilter] = useState("all");
   const [modalOpened, setModalOpened] = useState(false);
   const [transactionForm, setTransactionForm] = useState(null);
 
   useEffect(() => {
-    getTransactions().then(setTransactionList);
+    getTransactions().then(setTransactions);
   }, []);
 
   const addTransaction = transaction => {
-    const newId = transactionList.length
-      ? transactionList[transactionList.length - 1].id + 1
+    const newId = transactions.length
+      ? transactions[transactions.length - 1].id + 1
       : 1;
     transaction.id = newId;
-    addTransactions(transaction).then(setTransactionList);
+    addTransactions(transaction).then(setTransactions);
     setModalOpened(false);
   };
 
   const updateTransaction = editedTransaction => {
-    updateTransactions(editedTransaction).then(setTransactionList);
+    updateTransactions(editedTransaction).then(setTransactions);
     setModalOpened(false);
   };
 
   const deleteTransaction = id => {
-    deleteTransactions(id).then(setTransactionList);
+    deleteTransactions(id).then(setTransactions);
   };
 
   const getFilteredTransactions = () => {
     if (filter !== "all") {
-      return transactionList.filter(transaction => transaction.type === filter);
+      return transactions.filter(transaction => transaction.type === filter);
     } else {
-      return transactionList;
+      return transactions;
     }
   };
 
