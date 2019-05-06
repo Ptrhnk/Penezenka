@@ -27,8 +27,7 @@ const Input = styled.input`
 `;
 
 const StyledButton = styled.button`
-  width: 8rem;
-  height: 2rem;
+  padding: 0.4rem 1rem;
   font-family: inherit;
   color: inherit;
   letter-spacing: inherit;
@@ -40,34 +39,61 @@ const StyledButton = styled.button`
   outline: none;
 `;
 
-const TransactionForm = ({ transaction, confirm }) => {
-  const getCurrentDate = () => {
-    const today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const yyyy = today.getFullYear();
-    return `${yyyy}-${mm}-${dd}`;
-  };
+const initTransaction = {
+  name: "Name",
+  value: 0,
+  type: "in",
+  currency: "CZK"
+};
 
+const getCurrentDate = () => {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const yyyy = today.getFullYear();
+  return `${yyyy}-${mm}-${dd}`;
+};
+const parseDateToForm = date => {
+  const addZero = num => (num.length === 1 ? `0${num}` : num);
+  const dateArr = date.split(".");
+  return `${addZero(dateArr[2])}-${addZero(dateArr[1])}-${addZero(dateArr[0])}`;
+};
+
+const TransactionForm = ({ transaction, confirm }) => {
   const [name, setName] = useState(
-    transaction ? transaction.name : "Transaction name"
+    transaction ? transaction.name : initTransaction.name
   );
-  const [value, setValue] = useState(transaction ? transaction.value : 0);
-  const [type, setType] = useState(transaction ? transaction.type : "in");
+  const [value, setValue] = useState(
+    transaction ? transaction.value : initTransaction.value
+  );
+  const [type, setType] = useState(
+    transaction ? transaction.type : initTransaction.type
+  );
   const [created, setCreated] = useState(
-    transaction ? transaction.created : getCurrentDate
+    transaction ? parseDateToForm(transaction.created) : getCurrentDate
   );
+
+  const cutFirstZero = number => {
+    if (number.length === 2) {
+      const result = number[0] === "0" ? number[1] : number;
+      return result;
+    }
+    return number;
+  };
 
   const createTransactionObject = () => {
     const newValue = parseFloat(value);
     const dateArray = created.split("-");
-    const parsedDate = `${dateArray[2]}.${dateArray[1]}.${dateArray[0]}`;
+    const parsedDate = `${cutFirstZero(dateArray[2])}.${cutFirstZero(
+      dateArray[1]
+    )}.${dateArray[0]}`;
     const newObject = {
       name: name,
       value: newValue,
       type: type,
       created: parsedDate,
-      currency: "CZK"
+      currency: "CZK",
+      id: transaction ? transaction.id : null
     };
     return newObject;
   };
@@ -119,7 +145,7 @@ const TransactionForm = ({ transaction, confirm }) => {
         />
       </Row>
       <StyledButton onClick={() => confirm(createTransactionObject())}>
-        Add transaction
+        {transaction ? "Save" : "Add"}
       </StyledButton>
     </Form>
   );
