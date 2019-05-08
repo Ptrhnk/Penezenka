@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import TransactionButton from "./TransactionButton";
-import deleteIcon from "./../icons/delete.svg";
-import editIcon from "./../icons/edit.svg";
-import arrowUp from "../icons/arrow_upward.svg";
-import arrowDown from "../icons/arrow_downward.svg";
-import { transactionBoxMargin } from "../constants";
+import deleteIcon from "../../icons/delete.svg";
+import editIcon from "../../icons/edit.svg";
+import arrowUp from "../../icons/arrow_upward.svg";
+import arrowDown from "../../icons/arrow_downward.svg";
+import { transactionBoxMargin } from "../../constants";
 
-import { primaryShadow } from "../constants";
+import { globalShadow, globalLight } from "../../constants";
 
 const TransactionBox = styled.div`
-  background-color: rgb(216, 238, 255);
+  background-color: ${globalLight};
   width: 100%;
-  box-shadow: ${primaryShadow};
+  box-shadow: ${globalShadow};
   border-radius: 0.4rem;
   display: flex;
   align-items: center;
@@ -20,9 +20,12 @@ const TransactionBox = styled.div`
   flex-direction: column;
   flex-shrink: 0;
   transition: all 2s linear;
+  margin-top: ${transactionBoxMargin};
+  margin-bottom: ${transactionBoxMargin};
+  cursor: ${({ clickable }) => (clickable ? "pointer" : "default")};
 
   :not(:last-child) {
-    margin-bottom: ${transactionBoxMargin};
+    margin-bottom: 0;
   }
 `;
 
@@ -30,18 +33,10 @@ const TransactionInfo = styled.div`
   height: 3rem;
   margin-right: 1.5rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   flex-grow: 1;
 `;
-
-// const Id = styled.div`
-//   height: 3rem;
-//   width: 3rem;
-//   display: flex;
-//   flex-shrink: 0;
-//   justify-content: center;
-//   align-items: center;
-// `;
 
 const Name = styled.div`
   display: flex;
@@ -84,13 +79,12 @@ const Icon = styled.img`
   margin-right: 0.5rem;
 `;
 
-const Transaction = ({ data, onDelete, onEdit }) => {
+const Transaction = ({ data, onDelete, onEdit, clickable }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <TransactionBox>
+    <TransactionBox clickable={clickable}>
       <TransactionRow>
-        {/* <Id onClick={() => setOpen(!open)}>{data.id}</Id> */}
         <Icon src={data.type === "in" ? arrowUp : arrowDown} />
         <TransactionInfo onClick={() => setOpen(!open)}>
           <Name>{data.name}</Name>
@@ -98,23 +92,28 @@ const Transaction = ({ data, onDelete, onEdit }) => {
             {data.type === "in" ? "+" : "-"} {data.value} {data.currency}
           </Price>
         </TransactionInfo>
-        <TransactionButton
-          level={"warning"}
-          onClick={() => onEdit(data)}
-          label={"edit"}
-          icon={editIcon}
-        />
-        <TransactionButton
-          level={"danger"}
-          onClick={() => onDelete(data.id)}
-          label={"delete"}
-          icon={deleteIcon}
-        />
+        {onEdit && (
+          <TransactionButton
+            level={"warning"}
+            onClick={() => onEdit(data)}
+            label={"edit"}
+            icon={editIcon}
+          />
+        )}
+        {onDelete && (
+          <TransactionButton
+            level={"danger"}
+            onClick={() => onDelete(data.id)}
+            label={"delete"}
+            icon={deleteIcon}
+          />
+        )}
       </TransactionRow>
-      <DetailedContainer open={open} onClick={() => setOpen(!open)}>
-        <div>{data.created}</div>
-        <div>( {data.type} )</div>
-      </DetailedContainer>
+      {clickable && (
+        <DetailedContainer open={open} onClick={() => setOpen(!open)}>
+          <div>{data.created}</div>
+        </DetailedContainer>
+      )}
     </TransactionBox>
   );
 };

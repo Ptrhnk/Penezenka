@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-import { primaryShadow, primaryBorder, globalGreen } from "../constants";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
+import { globalShadow, globalBorder, globalGreen } from "../../constants";
+import FilterButtonGroup from "../FilterButtonGroup";
 
 const Heading = styled.h3`
   margin-bottom: 0.7rem;
@@ -11,7 +12,6 @@ const Heading = styled.h3`
 `;
 
 const Form = styled.div`
-  /* background-color: grey; */
   max-height: 100%;
   display: flex;
   justify-content: center;
@@ -20,29 +20,42 @@ const Form = styled.div`
 `;
 
 const Row = styled.div`
-  margin-top: 0.3rem;
+  margin-top: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
+const RowType = styled(Row)`
+  justify-content: space-around;
 `;
 
 const Input = styled.input`
-  border-radius: 1rem;
-  padding: 0.2rem 0.6rem;
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.7rem;
   border: none;
   outline: none;
   font-family: inherit;
   letter-spacing: inherit;
+  font-size: 0.8rem;
+  box-shadow: ${globalShadow};
+  text-align: center;
 `;
 
 const StyledButton = styled.button`
-  padding: 0.4rem 1rem;
   font-family: inherit;
+  font-size: 1rem;
   color: inherit;
   letter-spacing: inherit;
   background-color: ${globalGreen};
+  padding: 0.4rem 2rem;
   border-radius: 2rem;
-  border: ${primaryBorder};
-  box-shadow: ${primaryShadow};
-  margin-top: 2rem;
+  border: ${globalBorder};
+  box-shadow: ${globalShadow};
+  margin-top: 1rem;
   outline: none;
+  /* width: 100%; */
 `;
 
 const initTransaction = {
@@ -76,9 +89,10 @@ const TransactionForm = ({ transaction, confirm }) => {
 
   return (
     <Form>
-      <Heading>{transaction ? "Edit transaction" : "Add transaction"}</Heading>
+      <Heading>
+        {transaction ? "Edit transaction:" : "Add transaction:"}
+      </Heading>
       <Row>
-        Name:{" "}
         <Input
           onChange={event => setName(event.target.value)}
           value={name}
@@ -86,7 +100,6 @@ const TransactionForm = ({ transaction, confirm }) => {
         />
       </Row>
       <Row>
-        Value:{" "}
         <Input
           onChange={event => setValue(event.target.value)}
           value={value}
@@ -94,26 +107,6 @@ const TransactionForm = ({ transaction, confirm }) => {
         />
       </Row>
       <Row>
-        Type:{" "}
-        <input
-          type="radio"
-          name="type"
-          value={"in"}
-          checked={type === "in"}
-          onChange={() => setType("in")}
-        />{" "}
-        In{" "}
-        <input
-          type="radio"
-          name="type"
-          value={"out"}
-          checked={type === "out"}
-          onChange={() => setType("out")}
-        />{" "}
-        Out
-      </Row>
-      <Row>
-        Created:{" "}
         <DatePicker
           selected={created}
           onChange={date => setCreated(date)}
@@ -123,8 +116,16 @@ const TransactionForm = ({ transaction, confirm }) => {
           calendarClassName="calendar-form"
         />
       </Row>
+      <RowType>
+        <FilterButtonGroup
+          setTransactionFilter={setType}
+          selected={type}
+          filterTypes={["in", "out"]}
+          small
+        />
+      </RowType>
       <StyledButton onClick={() => confirm(createTransactionObject())}>
-        {transaction ? "Save" : "Add"}
+        Save
       </StyledButton>
     </Form>
   );

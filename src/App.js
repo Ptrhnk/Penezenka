@@ -5,7 +5,7 @@ import { createGlobalStyle } from "styled-components";
 
 import TransactionPage from "./components/pages/TransactionPage";
 import SummaryPage from "./components/pages/SummaryPage";
-import { globalBlue, primaryShadow } from "./constants";
+import { globalBlue, globalShadow } from "./constants";
 
 const Container = styled.div`
   background-color: black;
@@ -47,20 +47,15 @@ const GlobalStyle = createGlobalStyle`
   html {
     scroll-behavior: smooth;
   }
-
-  *, *::after, *::before {
-      margin: 0;
-      padding: 0;
-      box-sizing: inherit;
-  }
-
   body {
-    box-sizing: border-box;
-    color: ${props => (props.paleviolet ? "palevioletred" : "black")};
-
     @import url('https://fonts.googleapis.com/css?family=Poppins');
     font-family: 'Poppins', sans-serif;
     letter-spacing: .8px;
+  }
+  *, *::after, *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
   }
 
   .ReactModal__Overlay {
@@ -75,22 +70,27 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .date-picker-form {
-    border-radius: 1rem;
-    padding: 0.2rem 0.6rem;
+    border-radius: 0.3rem;
+    padding: 0.3rem 0.7rem;
     border: none;
     outline: none;
     font-family: inherit;
     letter-spacing: inherit;
+    font-size: 0.8rem;
+    box-shadow: ${globalShadow};
+    text-align: center;
   }
   .date-picker-summary {
-    border-radius: 1rem;
-    padding: 0.2rem 0.6rem;
-    border: none;
-    box-shadow: ${primaryShadow};
+    border-radius: 2rem;
+    padding: .8rem 0.6rem;
+    border: 2px solid black;
+    box-shadow: ${globalShadow};
     outline: none;
     font-family: inherit;
     letter-spacing: inherit;
     text-align: center;
-    margin-bottom: 2rem;
+    margin: 1rem;
+    cursor: pointer;
+    font-size: inherit;
   }
 `;

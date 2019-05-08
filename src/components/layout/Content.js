@@ -6,7 +6,7 @@ const Content = styled.div`
   width: 100%;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  padding: ${transactionBoxMargin};
+  padding: 0 ${transactionBoxMargin};
   display: flex;
   flex-direction: column;
   align-items: center;

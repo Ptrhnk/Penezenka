@@ -1,7 +1,7 @@
 import React from "react";
 import ReactModal from "react-modal";
 
-import { primaryBorder } from "../constants";
+import { globalBorder } from "../constants";
 
 const customStyle = {
   overlay: {
@@ -14,7 +14,7 @@ const customStyle = {
   content: {
     backgroundColor: "rgb(0, 169, 255)",
     opacity: "1",
-    border: primaryBorder,
+    border: globalBorder,
     borderRadius: ".8rem",
     width: "30rem",
     height: "30rem",

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { primaryShadow, primaryBorder } from "../constants";
+import { globalShadow, globalBorder } from "../../constants";
 
 const NiceButton = styled.button`
   width: 2rem;
@@ -9,11 +9,11 @@ const NiceButton = styled.button`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border: ${primaryBorder};
+  border: ${globalBorder};
   border-radius: 50%;
   margin-right: 1rem;
   outline: none;
-  box-shadow: ${primaryShadow};
+  box-shadow: ${globalShadow};
 
   background-color: ${({ level }) => {
     switch (level) {

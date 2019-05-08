@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import SummaryBox from "../SummaryBox";
 import Header from "../layout/Header";
@@ -9,25 +11,25 @@ import IntervalButtonGroup from "../IntervalButtonGroup";
 import WideButton from "../WideButton";
 import BackIcon from "../../icons/arrow_back.svg";
 import useTransactions from "./useTransactions";
-import { transactionBoxMargin, globalLightBlue } from "../../constants";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { globalLightBlue, globalBorder } from "../../constants";
+import TransactionList from "../transaction/TransactionList";
 
 const SummaryList = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   flex-shrink: 0;
-  height: 100%;
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
   width: 100%;
-  margin-bottom: ${transactionBoxMargin};
+  border-bottom: ${globalBorder};
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 `;
 
 const SummaryPage = ({ history }) => {
-  const [interval, setInterval] = useState("all");
+  const [interval, setInterval] = useState("month");
   const [transactions] = useTransactions();
   const [date, setDate] = useState(new Date());
 
@@ -87,6 +89,20 @@ const SummaryPage = ({ history }) => {
         />
       </Header>
       <Content>
+        <SummaryList>
+          <SummaryBox level={"in"} summary={getSummary("in")} />
+          <SummaryBox level={"out"} summary={getSummary("out")} />
+          <SummaryBox level={"all"} summary={getSummary("all")} />
+        </SummaryList>
+        <TransactionList transactions={getFilteredTransactions()} />
+      </Content>
+      <Footer>
+        <WideButton
+          onClick={() => history.push("/")}
+          label={"Back"}
+          bgColor={globalLightBlue}
+          icon={BackIcon}
+        />
         {interval === "day" && (
           <DatePicker
             selected={date}
@@ -105,19 +121,6 @@ const SummaryPage = ({ history }) => {
             showMonthYearPicker
           />
         )}
-        <SummaryList>
-          <SummaryBox level={"in"} summary={getSummary("in")} />
-          <SummaryBox level={"out"} summary={getSummary("out")} />
-          <SummaryBox level={"all"} summary={getSummary("all")} />
-        </SummaryList>
-      </Content>
-      <Footer>
-        <WideButton
-          onClick={() => history.push("/")}
-          label={"Back"}
-          bgColor={globalLightBlue}
-          icon={BackIcon}
-        />
       </Footer>
     </>
   );

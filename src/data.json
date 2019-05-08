@@ -41,28 +41,36 @@
       "id": 29
     },
     {
-      "name": "Name",
-      "value": 390,
+      "name": "UTRATA",
+      "value": 1934,
       "type": "out",
-      "created": "6.5.2019",
+      "created": "8.5.2019",
       "currency": "CZK",
       "id": 30
     },
     {
       "name": "Name",
-      "value": 120,
-      "type": "out",
-      "created": "6.5.2019",
+      "value": 0,
+      "type": "in",
+      "created": "8.5.2019",
       "currency": "CZK",
       "id": 31
     },
     {
       "name": "Name",
-      "value": 100,
+      "value": 0,
       "type": "in",
-      "created": "1.1.2019",
+      "created": "8.5.2019",
       "currency": "CZK",
       "id": 32
+    },
+    {
+      "name": "faoiuvcx",
+      "value": 123,
+      "type": "out",
+      "created": "8.5.2019",
+      "currency": "CZK",
+      "id": 33
     },
     {
       "name": "Name",
@@ -70,31 +78,47 @@
       "type": "in",
       "created": "8.5.2019",
       "currency": "CZK",
-      "id": 33
-    },
-    {
-      "name": "TTT",
-      "value": 555,
-      "type": "out",
-      "created": "7.5.2019",
-      "currency": "CZK",
       "id": 34
     },
     {
-      "name": "NAME",
-      "value": 555,
+      "name": "hsdfh",
+      "value": -11,
       "type": "in",
-      "created": "7.5.2019",
+      "created": "8.5.2019",
       "currency": "CZK",
-      "id": 35
+      "id": 36
+    },
+    {
+      "name": "qwertr",
+      "value": 534,
+      "type": "in",
+      "created": "8.5.2019",
+      "currency": "CZK",
+      "id": 37
+    },
+    {
+      "name": "qew",
+      "value": 3460,
+      "type": "out",
+      "created": "8.5.2019",
+      "currency": "CZK",
+      "id": 38
+    },
+    {
+      "name": "Vyhozený prachy",
+      "value": 23423,
+      "type": "in",
+      "created": "8.5.2019",
+      "currency": "CZK",
+      "id": 39
     },
     {
       "name": "Name",
-      "value": 78786,
-      "type": "in",
-      "created": "1.1.2019",
+      "value": 1420,
+      "type": "out",
+      "created": "8.5.2019",
       "currency": "CZK",
-      "id": 36
+      "id": 40
     }
   ]
 }

@@ -1,20 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import { primaryShadow, primaryBorder, globalGreen } from "../constants";
+import { globalShadow, globalBorder, globalGreen } from "../constants";
 
 const BigButton = styled.button`
-  width: 90%;
-  height: 80%;
+  height: 70%;
+  margin: 1rem;
   border-radius: 5rem;
   background-color: ${({ bgColor }) => (bgColor ? bgColor : globalGreen)};
-  box-shadow: ${primaryShadow};
+  box-shadow: ${globalShadow};
   letter-spacing: 0.2rem;
   text-transform: capitalize;
   font-family: inherit;
   display: flex;
+  flex-grow: 1;
   justify-content: center;
   align-items: center;
-  border: ${primaryBorder};
+  border: ${globalBorder};
   outline: none;
 `;
 

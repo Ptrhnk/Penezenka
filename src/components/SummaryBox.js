@@ -4,17 +4,14 @@ import styled from "styled-components";
 import arrowUp from "../icons/arrow_upward.svg";
 import arrowDown from "../icons/arrow_downward.svg";
 
-import { primaryShadow, primaryBorder } from "../constants";
+import { globalShadow, globalLight } from "../constants";
 
 const Box = styled.div`
-  height: 6rem;
-  width: 80%;
-  background-color: #fff;
-  margin: 1rem 1rem;
-  border: ${primaryBorder};
-  border-radius: 1rem;
-  box-shadow: ${primaryShadow};
-
+  background-color: ${globalLight};
+  margin: 1rem .7rem 0 .7rem;
+  padding: .7rem 1.4rem .7rem 1rem;
+  border-radius: 4rem
+  box-shadow: ${globalShadow};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,7 +37,7 @@ const SummaryBox = ({ level, label, summary }) => {
         <Icon src={arrowDown} alt={label} />
       )}
       <MarginLeft>
-        {/* {level !== "all" && (level === "in" ? "+" : "-")}  */}
+        {summary > 0 ? "+" : ""}
         {summary} CZK
       </MarginLeft>
     </Box>

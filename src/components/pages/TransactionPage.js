@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import TransactionList from "../TransactionList";
+import TransactionList from "../transaction/TransactionList";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import Content from "../layout/Content";
 import FilterButtonGroup from "../FilterButtonGroup";
 import WideButton from "../WideButton";
-import TransactionForm from "../TransactionForm";
+import TransactionForm from "../transaction/TransactionForm";
 import {
   getTransactions,
   deleteTransactions,
@@ -70,6 +70,7 @@ const TransactionPage = () => {
           setTransactionFilter={setFilter}
           selected={filter}
           filterTypes={["in", "out", "all"]}
+          overviewButton
         />
       </Header>
       <Content id={"screen"}>
@@ -77,6 +78,7 @@ const TransactionPage = () => {
           transactions={getFilteredTransactions()}
           onDelete={deleteTransaction}
           onEdit={handleEditButton}
+          clickable
         />
       </Content>
       <Footer>

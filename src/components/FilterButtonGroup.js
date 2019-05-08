@@ -8,7 +8,13 @@ import menuIcon from "../icons/menu_icon.svg";
 import summaryIcon from "../icons/diagram.svg";
 import { globalLightBlue } from "../constants";
 
-const FilterButtonGroup = ({ filterTypes, setTransactionFilter, selected }) => {
+const FilterButtonGroup = ({
+  filterTypes,
+  setTransactionFilter,
+  selected,
+  overviewButton,
+  small
+}) => {
   const getIcon = filterType => {
     switch (filterType) {
       case "in":
@@ -30,15 +36,19 @@ const FilterButtonGroup = ({ filterTypes, setTransactionFilter, selected }) => {
           label={filterType}
           selected={selected === filterType}
           onClick={() => setTransactionFilter(filterType)}
+          small={small}
         />
       ))}
-      <Link to="/summary">
-        <FilterButton
-          label={"Summary"}
-          icon={summaryIcon}
-          bgColor={globalLightBlue}
-        />
-      </Link>
+      {overviewButton && (
+        <Link to="/summary">
+          <FilterButton
+            label={"Summary"}
+            icon={summaryIcon}
+            bgColor={globalLightBlue}
+            small={small}
+          />
+        </Link>
+      )}
     </>
   );
 };

@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { primaryShadow, primaryBorder } from "../constants";
+import { globalShadow, globalBorder } from "../constants";
 
 const Button = styled.button`
   background-color: #fff;
   padding: 0.7rem 1.4rem;
-  border: ${primaryBorder};
+  border: ${globalBorder};
   border-radius: 3rem;
   box-shadow: ${({ selected }) =>
-    selected ? `inset ${primaryShadow}` : primaryShadow};
+    selected ? `inset ${globalShadow}` : globalShadow};
   outline: none;
   letter-spacing: inherit;
   font-family: inherit;

@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-import { primaryShadow, primaryBorder } from "../constants";
+import { globalShadow, globalBorder } from "../constants";
 
 const StyledButton = styled.button`
-  width: 3rem;
-  height: 3rem;
-  border: ${primaryBorder};
+  width: ${({ small }) => (small ? "2.5rem" : "3rem")};
+  height: ${({ small }) => (small ? "2.5rem" : "3rem")};
+  border: ${globalBorder};
   border-radius: 50%;
   box-shadow: ${({ selected }) =>
-    selected ? `inset ${primaryShadow}` : primaryShadow};
+    selected ? `inset ${globalShadow}` : globalShadow};
   background-color: ${({ bgColor }) => (bgColor ? bgColor : "white")};
   outline: none;
   display: flex;
@@ -23,9 +23,14 @@ const Icon = styled.img`
   width: 1.8rem;
 `;
 
-const FilterButton = ({ label, icon, onClick, selected, bgColor }) => {
+const FilterButton = ({ label, icon, onClick, selected, bgColor, small }) => {
   return (
-    <StyledButton onClick={onClick} selected={selected} bgColor={bgColor}>
+    <StyledButton
+      onClick={onClick}
+      selected={selected}
+      bgColor={bgColor}
+      small={small}
+    >
       <Icon src={icon} alt={label} />
     </StyledButton>
   );
