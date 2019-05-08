@@ -9,18 +9,10 @@
       "currency": "CZK"
     },
     {
-      "name": "Transaction name",
-      "value": 1234,
-      "type": "out",
-      "created": "02.05.2019",
-      "currency": "CZK",
-      "id": 10
-    },
-    {
-      "name": "ads",
+      "name": "NAZEV",
       "value": 324,
       "type": "out",
-      "created": "02.05.2019",
+      "created": "8.5.2019",
       "currency": "CZK",
       "id": 16
     },
@@ -33,14 +25,6 @@
       "id": 21
     },
     {
-      "name": "ads",
-      "value": 234,
-      "type": "in",
-      "created": "6.5.2019",
-      "currency": "CZK",
-      "id": 24
-    },
-    {
       "name": "Název transakce",
       "value": 2423,
       "type": "in",
@@ -49,12 +33,68 @@
       "id": 28
     },
     {
-      "name": "KSLDJOE",
-      "value": 3213,
+      "name": "Name",
+      "value": 1000,
       "type": "in",
       "created": "6.5.2019",
       "currency": "CZK",
       "id": 29
+    },
+    {
+      "name": "Name",
+      "value": 390,
+      "type": "out",
+      "created": "6.5.2019",
+      "currency": "CZK",
+      "id": 30
+    },
+    {
+      "name": "Name",
+      "value": 120,
+      "type": "out",
+      "created": "6.5.2019",
+      "currency": "CZK",
+      "id": 31
+    },
+    {
+      "name": "Name",
+      "value": 100,
+      "type": "in",
+      "created": "1.1.2019",
+      "currency": "CZK",
+      "id": 32
+    },
+    {
+      "name": "Name",
+      "value": 123,
+      "type": "in",
+      "created": "8.5.2019",
+      "currency": "CZK",
+      "id": 33
+    },
+    {
+      "name": "TTT",
+      "value": 555,
+      "type": "out",
+      "created": "7.5.2019",
+      "currency": "CZK",
+      "id": 34
+    },
+    {
+      "name": "NAME",
+      "value": 555,
+      "type": "in",
+      "created": "7.5.2019",
+      "currency": "CZK",
+      "id": 35
+    },
+    {
+      "name": "Name",
+      "value": 78786,
+      "type": "in",
+      "created": "1.1.2019",
+      "currency": "CZK",
+      "id": 36
     }
   ]
 }

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
 import { primaryShadow, primaryBorder, globalGreen } from "../constants";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Heading = styled.h3`
   margin-bottom: 0.7rem;
@@ -8,7 +11,8 @@ const Heading = styled.h3`
 `;
 
 const Form = styled.div`
-  height: 100%;
+  /* background-color: grey; */
+  max-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,6 +28,8 @@ const Input = styled.input`
   padding: 0.2rem 0.6rem;
   border: none;
   outline: none;
+  font-family: inherit;
+  letter-spacing: inherit;
 `;
 
 const StyledButton = styled.button`
@@ -46,19 +52,6 @@ const initTransaction = {
   currency: "CZK"
 };
 
-const getCurrentDate = () => {
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2, "0");
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const yyyy = today.getFullYear();
-  return `${yyyy}-${mm}-${dd}`;
-};
-const parseDateToForm = date => {
-  const addZero = num => (num.length === 1 ? `0${num}` : num);
-  const dateArr = date.split(".");
-  return `${addZero(dateArr[2])}-${addZero(dateArr[1])}-${addZero(dateArr[0])}`;
-};
-
 const TransactionForm = ({ transaction, confirm }) => {
   const [name, setName] = useState(
     transaction ? transaction.name : initTransaction.name
@@ -69,38 +62,21 @@ const TransactionForm = ({ transaction, confirm }) => {
   const [type, setType] = useState(
     transaction ? transaction.type : initTransaction.type
   );
-  const [created, setCreated] = useState(
-    transaction ? parseDateToForm(transaction.created) : getCurrentDate
-  );
+  const [created, setCreated] = useState(new Date());
 
-  const cutFirstZero = number => {
-    if (number.length === 2) {
-      const result = number[0] === "0" ? number[1] : number;
-      return result;
-    }
-    return number;
-  };
-
-  const createTransactionObject = () => {
-    const newValue = parseFloat(value);
-    const dateArray = created.split("-");
-    const parsedDate = `${cutFirstZero(dateArray[2])}.${cutFirstZero(
-      dateArray[1]
-    )}.${dateArray[0]}`;
-    const newObject = {
-      name: name,
-      value: newValue,
-      type: type,
-      created: parsedDate,
-      currency: "CZK",
-      id: transaction ? transaction.id : null
-    };
-    return newObject;
-  };
+  const createTransactionObject = () => ({
+    name: name,
+    value: parseFloat(value),
+    type: type,
+    created: `${created.getDate()}.${created.getMonth() +
+      1}.${created.getFullYear()}`,
+    currency: "CZK",
+    id: transaction ? transaction.id : null
+  });
 
   return (
     <Form>
-      <Heading>Transaction details:</Heading>
+      <Heading>{transaction ? "Edit transaction" : "Add transaction"}</Heading>
       <Row>
         Name:{" "}
         <Input
@@ -138,10 +114,13 @@ const TransactionForm = ({ transaction, confirm }) => {
       </Row>
       <Row>
         Created:{" "}
-        <Input
-          onChange={event => setCreated(event.target.value)}
-          value={created}
-          type="date"
+        <DatePicker
+          selected={created}
+          onChange={date => setCreated(date)}
+          dateFormat="d. MMMM, yyyy"
+          maxDate={new Date()}
+          className="date-picker-form"
+          calendarClassName="calendar-form"
         />
       </Row>
       <StyledButton onClick={() => confirm(createTransactionObject())}>

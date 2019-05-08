@@ -5,7 +5,7 @@ import { createGlobalStyle } from "styled-components";
 
 import TransactionPage from "./components/pages/TransactionPage";
 import SummaryPage from "./components/pages/SummaryPage";
-import { globalBlue } from "./constants";
+import { globalBlue, primaryShadow } from "./constants";
 
 const Container = styled.div`
   background-color: black;
@@ -27,9 +27,8 @@ const Wallet = styled.div`
 const App = () => {
   return (
     <BrowserRouter>
+      <GlobalStyle />
       <Container>
-        <GlobalStyle />
-
         <Wallet>
           <Switch>
             <Route path="/summary" component={SummaryPage} />
@@ -58,10 +57,10 @@ const GlobalStyle = createGlobalStyle`
   body {
     box-sizing: border-box;
     color: ${props => (props.paleviolet ? "palevioletred" : "black")};
-    letter-spacing: 1px;
 
     @import url('https://fonts.googleapis.com/css?family=Poppins');
     font-family: 'Poppins', sans-serif;
+    letter-spacing: .8px;
   }
 
   .ReactModal__Overlay {
@@ -73,5 +72,25 @@ const GlobalStyle = createGlobalStyle`
   }
   .ReactModal__Overlay--before-close{
       opacity: 0;
+  }
+
+  .date-picker-form {
+    border-radius: 1rem;
+    padding: 0.2rem 0.6rem;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    letter-spacing: inherit;
+  }
+  .date-picker-summary {
+    border-radius: 1rem;
+    padding: 0.2rem 0.6rem;
+    border: none;
+    box-shadow: ${primaryShadow};
+    outline: none;
+    font-family: inherit;
+    letter-spacing: inherit;
+    text-align: center;
+    margin-bottom: 2rem;
   }
 `;

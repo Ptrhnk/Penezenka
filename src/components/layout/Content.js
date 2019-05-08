@@ -6,10 +6,10 @@ const Content = styled.div`
   width: 100%;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  padding: ${transactionBoxMargin} ${transactionBoxMargin} 0
-    ${transactionBoxMargin};
+  padding: ${transactionBoxMargin};
   display: flex;
   flex-direction: column;
+  align-items: center;
   flex-grow: 1;
 `;
 

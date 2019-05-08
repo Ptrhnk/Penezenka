@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import TransactionButton from "./TransactionButton";
-// Icons
 import deleteIcon from "./../icons/delete.svg";
 import editIcon from "./../icons/edit.svg";
 import arrowUp from "../icons/arrow_upward.svg";
@@ -14,7 +13,6 @@ const TransactionBox = styled.div`
   background-color: rgb(216, 238, 255);
   width: 100%;
   box-shadow: ${primaryShadow};
-  margin-bottom: ${transactionBoxMargin};
   border-radius: 0.4rem;
   display: flex;
   align-items: center;
@@ -22,13 +20,18 @@ const TransactionBox = styled.div`
   flex-direction: column;
   flex-shrink: 0;
   transition: all 2s linear;
+
+  :not(:last-child) {
+    margin-bottom: ${transactionBoxMargin};
+  }
 `;
 
 const TransactionInfo = styled.div`
-  position: relative;
-  width: 100%;
   height: 3rem;
   margin-right: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
 `;
 
 // const Id = styled.div`
@@ -41,17 +44,15 @@ const TransactionInfo = styled.div`
 // `;
 
 const Name = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0;
+  display: flex;
+  justify-self: flex-start;
+  align-self: center;
 `;
 
 const Price = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 0;
+  display: flex;
+  justify-self: flex-end;
+  align-self: center;
 `;
 
 const TransactionRow = styled.div`

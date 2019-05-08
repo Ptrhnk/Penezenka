@@ -16,11 +16,14 @@ const customStyle = {
     opacity: "1",
     border: primaryBorder,
     borderRadius: ".8rem",
-    width: "20rem",
-    height: "20rem",
+    width: "30rem",
+    height: "30rem",
     top: "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)"
+    transform: "translate(-50%, -50%)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 };
 
