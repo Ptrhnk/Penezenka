@@ -25,10 +25,10 @@
       "id": 21
     },
     {
-      "name": "Název transakce",
+      "name": "Zbytečná transakce",
       "value": 2423,
       "type": "in",
-      "created": "6.5.2019",
+      "created": "9.5.2019",
       "currency": "CZK",
       "id": 28
     },
@@ -49,22 +49,6 @@
       "id": 30
     },
     {
-      "name": "Name",
-      "value": 0,
-      "type": "in",
-      "created": "8.5.2019",
-      "currency": "CZK",
-      "id": 31
-    },
-    {
-      "name": "Name",
-      "value": 0,
-      "type": "in",
-      "created": "8.5.2019",
-      "currency": "CZK",
-      "id": 32
-    },
-    {
       "name": "faoiuvcx",
       "value": 123,
       "type": "out",
@@ -81,44 +65,44 @@
       "id": 34
     },
     {
-      "name": "hsdfh",
-      "value": -11,
-      "type": "in",
-      "created": "8.5.2019",
-      "currency": "CZK",
-      "id": 36
-    },
-    {
       "name": "qwertr",
       "value": 534,
       "type": "in",
-      "created": "8.5.2019",
+      "created": "9.5.2019",
       "currency": "CZK",
       "id": 37
     },
     {
-      "name": "qew",
-      "value": 3460,
-      "type": "out",
-      "created": "8.5.2019",
-      "currency": "CZK",
-      "id": 38
-    },
-    {
       "name": "Vyhozený prachy",
-      "value": 23423,
+      "value": 2323,
       "type": "in",
-      "created": "8.5.2019",
+      "created": "9.5.2019",
       "currency": "CZK",
       "id": 39
     },
     {
-      "name": "Name",
-      "value": 1420,
+      "name": "Transka",
+      "value": 321,
       "type": "out",
-      "created": "8.5.2019",
+      "created": "9.5.2019",
       "currency": "CZK",
-      "id": 40
+      "id": 43
+    },
+    {
+      "name": "Transakce",
+      "value": 234,
+      "type": "in",
+      "created": "9.5.2019",
+      "currency": "CZK",
+      "id": 44
+    },
+    {
+      "name": "Jojo",
+      "value": 1233,
+      "type": "out",
+      "created": "9.5.2019",
+      "currency": "CZK",
+      "id": 45
     }
   ]
 }

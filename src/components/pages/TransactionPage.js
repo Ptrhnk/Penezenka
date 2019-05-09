@@ -95,6 +95,7 @@ const TransactionPage = () => {
         component={
           <TransactionForm
             confirm={transactionForm ? updateTransaction : addTransaction}
+            close={() => setModalOpened(false)}
             transaction={transactionForm}
           />
         }

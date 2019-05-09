@@ -3,6 +3,7 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import useTransactions from "./useTransactions";
 import SummaryBox from "../SummaryBox";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
@@ -10,9 +11,8 @@ import Content from "../layout/Content";
 import IntervalButtonGroup from "../IntervalButtonGroup";
 import WideButton from "../WideButton";
 import BackIcon from "../../icons/arrow_back.svg";
-import useTransactions from "./useTransactions";
-import { globalLightBlue, globalBorder } from "../../constants";
 import TransactionList from "../transaction/TransactionList";
+import { globalLightBlue, globalBorder } from "../../constants";
 
 const SummaryList = styled.div`
   display: flex;
@@ -26,6 +26,10 @@ const SummaryList = styled.div`
   border-bottom: ${globalBorder};
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+`;
+
+const StyledFooter = styled(Footer)`
+  justify-content: space-between;
 `;
 
 const SummaryPage = ({ history }) => {
@@ -96,7 +100,7 @@ const SummaryPage = ({ history }) => {
         </SummaryList>
         <TransactionList transactions={getFilteredTransactions()} />
       </Content>
-      <Footer>
+      <StyledFooter>
         <WideButton
           onClick={() => history.push("/")}
           label={"Back"}
@@ -110,6 +114,7 @@ const SummaryPage = ({ history }) => {
             dateFormat="d. MMMM, yyyy"
             maxDate={new Date()}
             className="date-picker-summary"
+            withPortal
           />
         )}
         {interval === "month" && (
@@ -119,9 +124,10 @@ const SummaryPage = ({ history }) => {
             dateFormat="MMMM, yyyy"
             className="date-picker-summary"
             showMonthYearPicker
+            withPortal
           />
         )}
-      </Footer>
+      </StyledFooter>
     </>
   );
 };

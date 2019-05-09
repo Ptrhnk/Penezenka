@@ -1,42 +1,23 @@
 import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 
 import TransactionPage from "./components/pages/TransactionPage";
 import SummaryPage from "./components/pages/SummaryPage";
-import { globalBlue, globalShadow } from "./constants";
-
-const Container = styled.div`
-  background-color: black;
-  height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-const Wallet = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-  height: 100%;
-  background-color: ${globalBlue};
-  border-radius: 0.8rem;
-`;
+import PageContainer from "./components/layout/PageContainer";
+import { globalBlack, globalShadow, globalYellow } from "./constants";
 
 const App = () => {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <Container>
-        <Wallet>
-          <Switch>
-            <Route path="/summary" component={SummaryPage} />
-            <Route exact path="/" component={TransactionPage} />
-            <Route render={() => <h1>this route does not exist</h1>} />
-          </Switch>
-        </Wallet>
-      </Container>
+      <PageContainer>
+        <Switch>
+          <Route path="/summary" component={SummaryPage} />
+          <Route exact path="/" component={TransactionPage} />
+          <Route render={() => <h1>this route does not exist</h1>} />
+        </Switch>
+      </PageContainer>
     </BrowserRouter>
   );
 };
@@ -50,6 +31,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     @import url('https://fonts.googleapis.com/css?family=Poppins');
     font-family: 'Poppins', sans-serif;
+    background-color: ${globalBlack};
     letter-spacing: .8px;
   }
   *, *::after, *::before {
@@ -92,5 +74,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 1rem;
     cursor: pointer;
     font-size: inherit;
+    background-color: ${globalYellow};
   }
 `;

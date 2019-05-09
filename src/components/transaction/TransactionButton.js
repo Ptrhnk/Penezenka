@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { globalShadow, globalBorder } from "../../constants";
+import {
+  globalShadow,
+  globalBorder,
+  globalRed,
+  globalYellow,
+  globalGreen
+} from "../../constants";
 
 const NiceButton = styled.button`
   width: 2rem;
@@ -18,15 +24,12 @@ const NiceButton = styled.button`
   background-color: ${({ level }) => {
     switch (level) {
       case "danger":
-        return "rgba(256, 0, 15, .7)";
+        return `${globalRed}`;
       case "warning":
-        return "rgb(252, 213, 74)";
+        return `${globalYellow}`;
       case "success":
-        return "rgb(70, 255, 155)";
-      case "info":
-        return "rgb(216, 238, 255)";
       default:
-        return "rgb(255, 255, 255)";
+        return `${globalGreen}`;
     }
   }};
 `;

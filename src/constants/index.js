@@ -5,8 +5,10 @@ export const globalShadow = "2px 2px 2px rgba(0, 0, 0, 0.25)";
 export const globalBorder = "2px solid black";
 export const transactionBoxMargin = ".7rem";
 
-export const globalGreen = "#62ffbb";
-export const globalBlue = "#00a9ff";
-export const globalLightBlue = "#00d4ff";
+export const globalBlack = "rgb(0, 0, 0)";
+export const globalGreen = "rgb(35, 255, 159)";
+export const globalBlue = "rgb(0, 169, 255)";
+export const globalLightBlue = "rgb(0, 230, 255)";
 export const globalLight = "rgba(255, 255, 255, 0.8)";
-export const globalPink = "rgb(255,3,169)";
+export const globalRed = "rgba(256, 0, 15, .7)";
+export const globalYellow = "rgb(252, 213, 74)";

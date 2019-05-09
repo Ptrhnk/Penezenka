@@ -5,6 +5,7 @@ import { globalShadow, globalBorder, globalGreen } from "../constants";
 const BigButton = styled.button`
   height: 70%;
   margin: 1rem;
+  padding: 0 2rem 0 1.6rem;
   border-radius: 5rem;
   background-color: ${({ bgColor }) => (bgColor ? bgColor : globalGreen)};
   box-shadow: ${globalShadow};
@@ -12,7 +13,6 @@ const BigButton = styled.button`
   text-transform: capitalize;
   font-family: inherit;
   display: flex;
-  flex-grow: 1;
   justify-content: center;
   align-items: center;
   border: ${globalBorder};

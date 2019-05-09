@@ -3,8 +3,13 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { globalShadow, globalBorder, globalGreen } from "../../constants";
 import FilterButtonGroup from "../FilterButtonGroup";
+import {
+  globalShadow,
+  globalBorder,
+  globalGreen,
+  globalRed
+} from "../../constants";
 
 const Heading = styled.h3`
   margin-bottom: 0.7rem;
@@ -20,7 +25,7 @@ const Form = styled.div`
 `;
 
 const Row = styled.div`
-  margin-top: 0.7rem;
+  margin-top: 0.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,6 +34,11 @@ const Row = styled.div`
 
 const RowType = styled(Row)`
   justify-content: space-around;
+  margin-top: 1.1rem;
+`;
+
+const RowButton = styled(Row)`
+  margin-top: 0;
 `;
 
 const Input = styled.input`
@@ -48,34 +58,28 @@ const StyledButton = styled.button`
   font-size: 1rem;
   color: inherit;
   letter-spacing: inherit;
-  background-color: ${globalGreen};
-  padding: 0.4rem 2rem;
+  background-color: ${({ bgColor }) =>
+    bgColor === "green" ? globalGreen : globalRed};
+  padding: 0.4rem 1rem;
+  margin: 0 0.4rem;
   border-radius: 2rem;
   border: ${globalBorder};
   box-shadow: ${globalShadow};
   margin-top: 1rem;
   outline: none;
-  /* width: 100%; */
 `;
 
-const initTransaction = {
-  name: "Name",
-  value: 0,
-  type: "in",
-  currency: "CZK"
-};
+const WarningRow = styled.div`
+  margin-top: 1rem;
+  min-height: 2rem;
+`;
 
-const TransactionForm = ({ transaction, confirm }) => {
-  const [name, setName] = useState(
-    transaction ? transaction.name : initTransaction.name
-  );
-  const [value, setValue] = useState(
-    transaction ? transaction.value : initTransaction.value
-  );
-  const [type, setType] = useState(
-    transaction ? transaction.type : initTransaction.type
-  );
+const TransactionForm = ({ transaction, confirm, close }) => {
+  const [name, setName] = useState(transaction ? transaction.name : "");
+  const [value, setValue] = useState(transaction ? transaction.value : "");
+  const [type, setType] = useState(transaction ? transaction.type : "in");
   const [created, setCreated] = useState(new Date());
+  const [showWarning, setShowWarning] = useState(false);
 
   const createTransactionObject = () => ({
     name: name,
@@ -87,47 +91,63 @@ const TransactionForm = ({ transaction, confirm }) => {
     id: transaction ? transaction.id : null
   });
 
+  const handleSaveButton = () => {
+    name && value ? confirm(createTransactionObject()) : setShowWarning(true);
+  };
+
   return (
-    <Form>
-      <Heading>
-        {transaction ? "Edit transaction:" : "Add transaction:"}
-      </Heading>
-      <Row>
-        <Input
-          onChange={event => setName(event.target.value)}
-          value={name}
-          type="text"
-        />
-      </Row>
-      <Row>
-        <Input
-          onChange={event => setValue(event.target.value)}
-          value={value}
-          type="number"
-        />
-      </Row>
-      <Row>
-        <DatePicker
-          selected={created}
-          onChange={date => setCreated(date)}
-          dateFormat="d. MMMM, yyyy"
-          maxDate={new Date()}
-          className="date-picker-form"
-          calendarClassName="calendar-form"
-        />
-      </Row>
-      <RowType>
-        <FilterButtonGroup
-          setTransactionFilter={setType}
-          selected={type}
-          filterTypes={["in", "out"]}
-          small
-        />
-      </RowType>
-      <StyledButton onClick={() => confirm(createTransactionObject())}>
-        Save
-      </StyledButton>
-    </Form>
+    <>
+      <Form>
+        <Heading>
+          {transaction ? "Edit transaction:" : "Add transaction:"}
+        </Heading>
+        <Row>
+          <Input
+            onChange={event => setName(event.target.value)}
+            value={name}
+            placeholder="Name"
+            type="text"
+          />
+        </Row>
+        <Row>
+          <Input
+            onChange={event => setValue(event.target.value)}
+            value={value}
+            placeholder="Value"
+            type="number"
+          />
+        </Row>
+        <Row>
+          <DatePicker
+            selected={created}
+            onChange={date => setCreated(date)}
+            dateFormat="d. MMMM, yyyy"
+            maxDate={new Date()}
+            className="date-picker-form"
+            calendarClassName="calendar-form"
+          />
+        </Row>
+        <RowType>
+          <FilterButtonGroup
+            setTransactionFilter={setType}
+            selected={type}
+            filterTypes={["in", "out"]}
+            small
+          />
+        </RowType>
+      </Form>
+      <RowButton>
+        <StyledButton onClick={close} bgColor="red">
+          Close
+        </StyledButton>
+        <StyledButton onClick={() => handleSaveButton()} bgColor="green">
+          Save
+        </StyledButton>
+      </RowButton>
+      <WarningRow>
+        {showWarning && <h3>Please fill name and value!</h3>}
+      </WarningRow>
+    </>
   );
 };
 
