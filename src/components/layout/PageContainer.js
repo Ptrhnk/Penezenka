@@ -10,17 +10,12 @@ const PageContainer = styled.div`
   height: ${({ height }) => height}px;
   background-color: ${globalBlue};
   border-radius: 0.8rem;
-  max-width: 48%;
+  max-width: 42%;
 
   @media (max-width: 1200px) {
     min-width: 60%;
-    background: palevioletred;
   }
   @media (max-width: 900px) {
-    min-width: 80%;
-    background: palevioletred;
-  }
-  @media (max-width: 700px) {
     min-width: 100%;
     background: palevioletred;
   }

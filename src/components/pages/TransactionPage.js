@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import TransactionList from "../transaction/TransactionList";
 import Header from "../layout/Header";
@@ -26,6 +26,12 @@ const TransactionPage = () => {
   useEffect(() => {
     getTransactions().then(setTransactions);
   }, []);
+
+  const content = useRef(null);
+
+  useEffect(() => {
+    content.current.scrollTo(0, 0);
+  }, [filter]);
 
   const addTransaction = transaction => {
     const newId = transactions.length
@@ -73,7 +79,7 @@ const TransactionPage = () => {
           overviewButton
         />
       </Header>
-      <Content id={"screen"}>
+      <Content ref={content} id={"screen"}>
         <TransactionList
           transactions={getFilteredTransactions()}
           onDelete={deleteTransaction}

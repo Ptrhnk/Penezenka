@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -36,6 +36,12 @@ const SummaryPage = ({ history }) => {
   const [interval, setInterval] = useState("month");
   const [transactions] = useTransactions();
   const [date, setDate] = useState(new Date());
+
+  const content = useRef(null);
+
+  useEffect(() => {
+    content.current.scrollTo(0, 0);
+  }, [interval]);
 
   const getDate = () =>
     `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
@@ -92,7 +98,7 @@ const SummaryPage = ({ history }) => {
           intervalTypes={["day", "month", "all"]}
         />
       </Header>
-      <Content>
+      <Content ref={content}>
         <SummaryList>
           <SummaryBox level={"in"} summary={getSummary("in")} />
           <SummaryBox level={"out"} summary={getSummary("out")} />
