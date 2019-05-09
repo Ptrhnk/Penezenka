@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { globalShadow, globalBorder } from "../constants";
+import Icon from "./Icon";
 
 const StyledButton = styled.button`
   width: ${({ small }) => (small ? "2.5rem" : "3rem")};
@@ -18,12 +19,7 @@ const StyledButton = styled.button`
   flex-shrink: 0;
 `;
 
-const Icon = styled.img`
-  height: 1.8rem;
-  width: 1.8rem;
-`;
-
-const FilterButton = ({ label, icon, onClick, selected, bgColor, small }) => {
+const FilterButton = ({ type, onClick, selected, bgColor, small }) => {
   return (
     <StyledButton
       onClick={onClick}
@@ -31,7 +27,7 @@ const FilterButton = ({ label, icon, onClick, selected, bgColor, small }) => {
       bgColor={bgColor}
       small={small}
     >
-      <Icon src={icon} alt={label} />
+      <Icon type={type} />
     </StyledButton>
   );
 };

@@ -122,6 +122,7 @@ const SummaryPage = ({ history }) => {
             selected={date}
             onChange={date => setDate(date)}
             dateFormat="MMMM, yyyy"
+            maxDate={new Date()}
             className="date-picker-summary"
             showMonthYearPicker
             withPortal
