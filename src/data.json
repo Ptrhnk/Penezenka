@@ -65,20 +65,12 @@
       "id": 34
     },
     {
-      "name": "qwertr",
+      "name": "Vyhozený prachy",
       "value": 534,
-      "type": "in",
+      "type": "out",
       "created": "9.5.2019",
       "currency": "CZK",
       "id": 37
-    },
-    {
-      "name": "Vyhozený prachy",
-      "value": 2323,
-      "type": "in",
-      "created": "9.5.2019",
-      "currency": "CZK",
-      "id": 39
     },
     {
       "name": "Transka",
@@ -95,14 +87,6 @@
       "created": "9.5.2019",
       "currency": "CZK",
       "id": 44
-    },
-    {
-      "name": "Jojo",
-      "value": 1233,
-      "type": "out",
-      "created": "9.5.2019",
-      "currency": "CZK",
-      "id": 45
     }
   ]
 }

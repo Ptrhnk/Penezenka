@@ -4,20 +4,23 @@ import { createGlobalStyle } from "styled-components";
 
 import TransactionPage from "./components/pages/TransactionPage";
 import SummaryPage from "./components/pages/SummaryPage";
+import BlackBody from "./components/layout/BlackBody";
 import PageContainer from "./components/layout/PageContainer";
-import { globalBlack, globalShadow, globalYellow } from "./constants";
+import { globalShadow, globalYellow } from "./constants";
 
 const App = () => {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <PageContainer>
-        <Switch>
-          <Route path="/summary" component={SummaryPage} />
-          <Route exact path="/" component={TransactionPage} />
-          <Route render={() => <h1>this route does not exist</h1>} />
-        </Switch>
-      </PageContainer>
+      <BlackBody>
+        <PageContainer>
+          <Switch>
+            <Route path="/summary" component={SummaryPage} />
+            <Route exact path="/" component={TransactionPage} />
+            <Route render={() => <h1>this route does not exist</h1>} />
+          </Switch>
+        </PageContainer>
+      </BlackBody>
     </BrowserRouter>
   );
 };
@@ -31,7 +34,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     @import url('https://fonts.googleapis.com/css?family=Poppins');
     font-family: 'Poppins', sans-serif;
-    background-color: ${globalBlack};
     letter-spacing: .8px;
   }
   *, *::after, *::before {
