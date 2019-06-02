@@ -27,7 +27,7 @@ const TransactionPage = () => {
     getTransactions().then(setTransactions);
   }, []);
 
-  const content = useRef(null);
+  const content = useRef();
 
   useEffect(() => {
     content.current.scrollTo(0, 0);

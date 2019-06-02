@@ -37,7 +37,7 @@ const SummaryPage = ({ history }) => {
   const [transactions] = useTransactions();
   const [date, setDate] = useState(new Date());
 
-  const content = useRef(null);
+  const content = useRef();
 
   useEffect(() => {
     content.current.scrollTo(0, 0);
