@@ -81,28 +81,12 @@
       "id": 44
     },
     {
-      "name": "234234",
-      "value": 23523,
-      "type": "in",
-      "created": "14.5.2019",
-      "currency": "CZK",
-      "id": 46
-    },
-    {
       "name": "NECO",
       "value": 4793,
       "type": "in",
       "created": "14.5.2019",
       "currency": "CZK",
       "id": 47
-    },
-    {
-      "name": "fjweowi",
-      "value": 2342,
-      "type": "in",
-      "created": "14.5.2019",
-      "currency": "CZK",
-      "id": 48
     },
     {
       "name": "Matrix",
@@ -114,11 +98,19 @@
     },
     {
       "name": "Ahoj",
-      "value": 231,
-      "type": "in",
-      "created": "14.5.2019",
+      "value": 2318,
+      "type": "out",
+      "created": "6.6.2019",
       "currency": "CZK",
       "id": 50
+    },
+    {
+      "name": "kjdsadk",
+      "value": 4324,
+      "type": "in",
+      "created": "3.6.2019",
+      "currency": "CZK",
+      "id": 51
     }
   ]
 }

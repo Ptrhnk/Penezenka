@@ -35,6 +35,10 @@ const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Poppins');
     font-family: 'Poppins', sans-serif;
     letter-spacing: .8px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
   }
   *, *::after, *::before {
       margin: 0;
